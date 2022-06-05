@@ -32,6 +32,43 @@
             </p>
           </a>
         </div>
+
+        <div class="col">
+          <a href="/tools/browser-info.html" class="text-decoration-none text-dark">
+            <div class="ratio ratio-1x1 mb-1">
+              <div class="rounded border d-flex justify-content-center align-items-center fs-1">
+                <i class="fab fa-internet-explorer"></i>
+              </div>
+            </div>
+            <p class="text-center text-secondary text-truncate">
+              <small>浏览器信息</small>
+            </p>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/tools/color-picker.html" class="text-decoration-none text-dark">
+            <div class="ratio ratio-1x1 mb-1">
+              <div class="rounded border d-flex justify-content-center align-items-center fs-1">
+                <i class="fas fa-eye-dropper"></i>
+              </div>
+            </div>
+            <p class="text-center text-secondary text-truncate">
+              <small>图片拾色</small>
+            </p>
+          </a>
+        </div>
+        <div class="col">
+          <a href="/tools/http-api-debug.html" class="text-decoration-none text-dark">
+            <div class="ratio ratio-1x1 mb-1">
+              <div class="rounded border d-flex justify-content-center align-items-center fs-1">
+                <i class="fas fa-bug"></i>
+              </div>
+            </div>
+            <p class="text-center text-secondary text-truncate">
+              <small>Http接口调试</small>
+            </p>
+          </a>
+        </div>
       </div>
     </div>
   </layout>
