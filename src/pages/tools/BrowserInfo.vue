@@ -1,16 +1,22 @@
 <template>
   <layout>
-    <div class=" container-xxl py-5">
+    <div class="container-xxl py-5">
       <h1 class="pb-3 mb-2">查看当前浏览器信息</h1>
-      <p class="lead mb-5">查看浏览器标识，窗口分辨率，触控支持，网络连接信息，电量信息，可用内存等信息</p>
+      <p class="lead mb-5">
+        查看浏览器标识，窗口分辨率，触控支持，网络连接信息，电量信息，可用内存等信息
+      </p>
       <!-- 表格是无法做响应式的，这里渲染两个表格，分别显示于不同的屏幕尺寸上 -->
       <div class="d-none d-md-block table-responsive">
         <table class="table table-bordered">
           <tbody>
             <tr v-for="(row, idx) in buildMdTable()" :key="idx">
               <!-- 奇数是 key ,显示成标题，加粗 -->
-              <td v-for="(cell, idx2) in row" :key="idx2"
-                :class="(idx2+1) % 2 === 1 ?['fw-bold','text-nowrap']:['user-select-all']" :colspan="cell.colspan">
+              <td
+                v-for="(cell, idx2) in row"
+                :key="idx2"
+                :class="(idx2 + 1) % 2 === 1 ? ['fw-bold', 'text-nowrap'] : ['user-select-all']"
+                :colspan="cell.colspan"
+              >
                 {{ cell.content }}
               </td>
             </tr>
@@ -22,7 +28,7 @@
           <tbody>
             <tr v-for="item in data" :key="item.key">
               <th class="text-nowrap">{{ item.key }}</th>
-              <td class=" user-select-all">{{ item.value }}</td>
+              <td class="user-select-all">{{ item.value }}</td>
             </tr>
           </tbody>
         </table>
@@ -31,8 +37,8 @@
   </layout>
 </template>
 <script lang="ts" setup>
-import Layout from "@/components/Layout.vue";
-import { reactive } from "vue";
+import Layout from '@/components/Layout.vue'
+import { reactive } from 'vue'
 
 interface Kv {
   key: string
@@ -48,7 +54,7 @@ data.push({ key: '页面宽度', value: window.innerWidth })
 data.push({ key: '语言', value: navigator.language })
 if (performance && performance.memory) {
   const totalJSHeapSize = (performance as any).memory.jsHeapSizeLimit
-  data.push({ key: "可用内存", value: (totalJSHeapSize / 1024 / 1024 / 1024).toFixed(2) + 'GB' })
+  data.push({ key: '可用内存', value: (totalJSHeapSize / 1024 / 1024 / 1024).toFixed(2) + 'GB' })
 }
 // 网络信息
 const networkInformation = (navigator as any).connection
@@ -81,7 +87,9 @@ function formatSeconds(seconds: number): string {
   let leftSeconds = seconds - hours * 3600
   const minutes = Math.floor(leftSeconds / 60)
   leftSeconds = leftSeconds - minutes * 60
-  return `${hours ? hours + '小时' : ''}${minutes ? minutes + '分钟' : ''}${leftSeconds ? leftSeconds + '秒' : ''}`
+  return `${hours ? hours + '小时' : ''}${minutes ? minutes + '分钟' : ''}${
+    leftSeconds ? leftSeconds + '秒' : ''
+  }`
 }
 function setBatteryInfo(info: string) {
   let idx = data.findIndex(value => value.key === '电量信息')
@@ -96,8 +104,9 @@ function fetchBatterManagerInfo() {
   if (!navigator.getBattery) {
     return
   }
-  (navigator as any).getBattery()
-    .then((batteryManager) => {
+  ;(navigator as any)
+    .getBattery()
+    .then(batteryManager => {
       let info = ''
       if (batteryManager.charging) {
         info = `${info},正在充电`
@@ -118,7 +127,8 @@ function fetchBatterManagerInfo() {
 
 fetchBatterManagerInfo()
 if ((navigator as any).getBattery) {
-  (navigator as any).getBattery()
+  ;(navigator as any)
+    .getBattery()
     .then((batteryManager: any) => {
       batteryManager.onchargingchange = fetchBatterManagerInfo
       batteryManager.onchargingtimechange = fetchBatterManagerInfo
@@ -154,7 +164,7 @@ function buildMdTable(): TablleCell[][] {
       row.push({ content: datum.key, colspan: 1 })
       row.push({ content: datum.value, colspan: valueCells })
       allocatedCells += valueCells + 1
-      return;
+      return
     }
     // 超出的情况，判定已经分配的是不是刚好够6个格子，如果不够，补上
     if (allocatedCells < 6) {
@@ -169,12 +179,14 @@ function buildMdTable(): TablleCell[][] {
     row.push({ content: datum.value, colspan: valueCells })
   })
   if (row.length) {
-    if(allocatedCells<6){
-       const lastCell = row[row.length - 1]
+    if (allocatedCells < 6) {
+      const lastCell = row[row.length - 1]
       lastCell.colspan = lastCell.colspan + (6 - allocatedCells)
     }
     result.push(row)
   }
   return result
 }
+// indexedDB
+data.push({ key: 'indexedDB', value: window.indexedDB ? '支持' : '不支持' })
 </script>

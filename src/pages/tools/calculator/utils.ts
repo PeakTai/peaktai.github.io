@@ -1,5 +1,5 @@
 export function checkDecimal(numStr: string): boolean {
-  return /^[0-9]{0,13}(\.[0-9]{1,3})?%?$/.test(numStr);
+  return /^[0-9]{0,13}(\.[0-9]{1,3})?%?$/.test(numStr)
 }
 
 /**
@@ -7,11 +7,11 @@ export function checkDecimal(numStr: string): boolean {
  * @param char
  */
 export function checkSingleDigits(char: string): boolean {
-  return /^[0-9]$/.test(char);
+  return /^[0-9]$/.test(char)
 }
 
 export function checkOperator(char: string): boolean {
-  return /^[\+\-\*\/x÷]$/.test(char);
+  return /^[+\-*/x÷]$/.test(char)
 }
 
 /**
@@ -19,12 +19,12 @@ export function checkOperator(char: string): boolean {
  * @param str
  * @param char
  */
-export function getCharOccurrencesOfStr(str: string, char: string) {
-  let count = 0;
+export function getCharOccurrencesOfStr(str: string, char: string): number {
+  let count = 0
   for (let i = 0; i < str.length; i++) {
     if (str.charAt(i) === char) {
-      count++;
+      count++
     }
   }
-  return count;
+  return count
 }

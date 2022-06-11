@@ -1,12 +1,23 @@
 <template>
   <div class="position-relative">
     <template v-if="data.clipboardVisible">
-      <i v-if="!data.copied" class="fas fa-copy position-absolute" @click="copy" ref="copy"
-        style="cursor: pointer; top: 0.3em; right: 0.3em"></i>
-      <i v-if="data.copied" class="fas fa-check position-absolute text-success" ref="copy"
-        style="cursor: pointer; top: 0.3em; right: 0.3em"></i>
+      <i
+        v-if="!data.copied"
+        class="fas fa-copy position-absolute"
+        @click="copy"
+        ref="copy"
+        style="cursor: pointer; top: 0.3em; right: 0.3em"
+      ></i>
+      <i
+        v-if="data.copied"
+        class="fas fa-check position-absolute text-success"
+        ref="copy"
+        style="cursor: pointer; top: 0.3em; right: 0.3em"
+      ></i>
     </template>
-    <pre class="bg-light p-3 lh-base"><code :class="[data.className]" v-html="data.highlightCode"></code></pre>
+    <pre
+      class="bg-light p-3 lh-base"
+    ><code :class="[data.className]" v-html="data.highlightCode"></code></pre>
   </div>
 </template>
 <script lang="ts" setup>

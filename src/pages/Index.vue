@@ -8,15 +8,25 @@
             <i class="fas fa-tags me-2"></i>标签
           </h4>
           <div v-if="data.tags.length">
-            <button v-for="tag in data.tags" :key="tag.name" :class="{ active: data.tag === tag.name }"
-              @click="data.tag = tag.name" type="button" class="btn btn-outline-secondary btn-sm mb-2 me-2">
+            <button
+              v-for="tag in data.tags"
+              :key="tag.name"
+              :class="{ active: data.tag === tag.name }"
+              @click="data.tag = tag.name"
+              type="button"
+              class="btn btn-outline-secondary btn-sm mb-2 me-2"
+            >
               {{ tag.name }}（{{ tag.count }}）
             </button>
           </div>
         </div>
         <div class="col-md-7 col-lg-8">
-          <input class="form-control form-control-lg mb-4" placeholder="🔎 输入关键字过滤文章" v-model="data.keyword"
-            maxlength="32" />
+          <input
+            class="form-control form-control-lg mb-4"
+            placeholder="🔎 输入关键字过滤文章"
+            v-model="data.keyword"
+            maxlength="32"
+          />
           <div v-if="data.keyword && filteredList.length > 20" class="mb-4 text-secondary">
             <i class="fas fa-info-circle me-1"></i>
             多个关键字可以使用空格来分隔，以匹配到包含所有关键字的记录，进行更精准的搜索，缩小搜索范围。
@@ -50,7 +60,7 @@ import Layout from '../components/Layout.vue'
 import { Page, pages } from '../../pages'
 import { computed, reactive } from 'vue'
 import { formatDate } from '@/utils/date'
-import { PageMatchResult, buildBlankMatchResult, matchPages } from './search';
+import { PageMatchResult, buildBlankMatchResult, matchPages } from './search'
 
 interface TagInfo {
   name: string

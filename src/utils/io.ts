@@ -5,7 +5,7 @@ export function readFileAsBuffer(file: Blob): Promise<ArrayBuffer> {
       const buffer: ArrayBuffer = evt.target.result
       resolve(buffer)
     }
-    fileReader.onerror = (error) => {
+    fileReader.onerror = error => {
       reject(error)
     }
     fileReader.readAsArrayBuffer(file)

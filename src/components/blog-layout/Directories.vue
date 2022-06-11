@@ -1,13 +1,19 @@
 <template>
   <div class="text-secondary">
     <template v-for="(directory, idx) in directories" :key="directory.top">
-      <p :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === undefined }"
-        @click="scrollToDirectory(directory)">
+      <p
+        :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === undefined }"
+        @click="scrollToDirectory(directory)"
+      >
         {{ directory.name }}
       </p>
-      <p v-for="(subDirectory, subIdx) in directory.subdirectories" :key="subDirectory.name"
-        :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === subIdx }" class="ps-3"
-        @click="scrollToDirectory(subDirectory)">
+      <p
+        v-for="(subDirectory, subIdx) in directory.subdirectories"
+        :key="subDirectory.name"
+        :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === subIdx }"
+        class="ps-3"
+        @click="scrollToDirectory(subDirectory)"
+      >
         {{ subDirectory.name }}
       </p>
     </template>
@@ -54,8 +60,10 @@ export default defineComponent({
       // 所以不能直接使用 top 属性来判定位置，只有实时获取才可以真正响应式
       const idx = this.directories.findIndex((directory, index) => {
         const next = this.directories[index + 1]
-        return scrollY >= getTopRelativeToBody(directory.el)
-          && (!next || scrollY < getTopRelativeToBody(next.el))
+        return (
+          scrollY >= getTopRelativeToBody(directory.el) &&
+          (!next || scrollY < getTopRelativeToBody(next.el))
+        )
       })
       if (idx == -1) {
         this.activeIndices = []
@@ -65,8 +73,10 @@ export default defineComponent({
       const subdirectories: Directory[] = directory.subdirectories || []
       const subIdx = subdirectories.findIndex((directory, index) => {
         const next = subdirectories[index + 1]
-        return scrollY >= getTopRelativeToBody(directory.el)
-          && (!next || scrollY < getTopRelativeToBody(next.el))
+        return (
+          scrollY >= getTopRelativeToBody(directory.el) &&
+          (!next || scrollY < getTopRelativeToBody(next.el))
+        )
       })
       if (subIdx === -1) {
         this.activeIndices = [idx]

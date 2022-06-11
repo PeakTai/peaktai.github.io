@@ -1,7 +1,6 @@
 <template>
   <layout>
-    <div class=" container-xxl py-5">
-
+    <div class="container-xxl py-5">
       <h1 class="pb-3 mb-2">在线文件二进制查看器</h1>
       <p class="lead mb-5">
         以二制进的形式呈现文件内容，支持查看字节对应的ASCII码和十六进制，对设备有较高要求，
@@ -11,19 +10,34 @@
       <div class="row mb-3">
         <div class="col-md-4">
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" v-model="data.showByte" id="ipt-show-byte">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              v-model="data.showByte"
+              id="ipt-show-byte"
+            />
             <label class="form-check-label" for="ipt-show-byte">显示8位字节</label>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" v-model="data.showHex" id="ipt-show-hex">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              v-model="data.showHex"
+              id="ipt-show-hex"
+            />
             <label class="form-check-label" for="ipt-show-hex">显示十六进制</label>
           </div>
         </div>
         <div class="col-md-4">
           <div class="form-check">
-            <input type="checkbox" class="form-check-input" v-model="data.showAscii" id="ipt-show-ascii">
+            <input
+              type="checkbox"
+              class="form-check-input"
+              v-model="data.showAscii"
+              id="ipt-show-ascii"
+            />
             <label class="form-check-label" for="ipt-show-ascii">显示Ascii</label>
           </div>
         </div>
@@ -32,7 +46,7 @@
       <label class="btn btn-light btn-lg d-block mb-3 py-5">
         <i class="fas fa-file-alt me-2"></i>
         点击选择要查看的文件
-        <input type="file" class="d-none" accept="*/*" @change="handleFileChange($event)">
+        <input type="file" class="d-none" accept="*/*" @change="handleFileChange($event)" />
       </label>
 
       <div class="font-monospace bg-light mb-2" ref="resultEl">
@@ -41,8 +55,14 @@
 
       <div v-if="data.result && data.pages" class="row gy-2">
         <div class="col-md-6">
-          <button v-for="page in data.pages" type="button" class="btn btn-link" :disabled="page === data.pn"
-            @click="switchPn(page)">
+          <button
+            v-for="page in data.pages"
+            :key="page"
+            type="button"
+            class="btn btn-link"
+            :disabled="page === data.pn"
+            @click="switchPn(page)"
+          >
             {{ page }}
           </button>
         </div>
@@ -61,22 +81,22 @@
   </layout>
 </template>
 <script lang="ts" setup>
-import { ref, onBeforeUnmount, onMounted, reactive, watch } from "vue";
-import { hideLoading, showLoading, showWarning } from "@/utils/message";
-import Layout from "@/components/Layout.vue";
-import { splitArrayToTwoDimensional } from "@/utils/array";
-import { sleep } from "@/utils/sleep";
-import { byteToLength8Str, paddingStr, toLength2Hex } from "./utils";
-import { readFileAsBuffer } from "@/utils/io";
+import { ref, onBeforeUnmount, onMounted, reactive, watch } from 'vue'
+import { hideLoading, showLoading, showWarning } from '@/utils/message'
+import Layout from '@/components/Layout.vue'
+import { splitArrayToTwoDimensional } from '@/utils/array'
+import { sleep } from '@/utils/sleep'
+import { byteToLength8Str, paddingStr, toLength2Hex } from './utils'
+import { readFileAsBuffer } from '@/utils/io'
 
 const data = reactive<{
-  showByte: boolean,
-  showHex: boolean,
-  showAscii: boolean,
-  result: string,
-  total: number,
-  pz: number,
-  pn: number,
+  showByte: boolean
+  showHex: boolean
+  showAscii: boolean
+  result: string
+  total: number
+  pz: number
+  pn: number
   pages: number[]
 }>({
   showByte: false,
@@ -90,7 +110,7 @@ const data = reactive<{
 })
 
 const resultEl = ref<HTMLElement | null>(null)
-let buffer: ArrayBuffer | undefined = undefined;
+let buffer: ArrayBuffer | undefined = undefined
 
 watch(() => data.showByte, buildResult)
 watch(() => data.showHex, buildResult)
@@ -103,24 +123,25 @@ onBeforeUnmount(() => {
   window.removeEventListener('resize', buildResult)
 })
 
-
 function handleFileChange(evt: Event) {
   showLoading()
   const ipt = evt.currentTarget as HTMLInputElement
-  Promise.resolve().then(async () => {
-    // 不等待一会，后面读文件会卡住，loading出不来
-    await sleep(100)
-    if (!ipt.files || !ipt.files.length) {
-      return
-    }
-    buffer = undefined;
-    data.result = ''
-    buffer = await readFileAsBuffer(ipt.files[0])
-    data.total = buffer.byteLength || buffer.length
-    data.pages = []
-    data.pn = 1
-    buildResult()
-  }).catch(showWarning)
+  Promise.resolve()
+    .then(async () => {
+      // 不等待一会，后面读文件会卡住，loading出不来
+      await sleep(100)
+      if (!ipt.files || !ipt.files.length) {
+        return
+      }
+      buffer = undefined
+      data.result = ''
+      buffer = await readFileAsBuffer(ipt.files[0])
+      data.total = buffer.byteLength || buffer.length
+      data.pages = []
+      data.pn = 1
+      buildResult()
+    })
+    .catch(showWarning)
     .finally(hideLoading)
 }
 
@@ -133,11 +154,11 @@ function buildResult() {
   }
   if (!data.showByte && !data.showHex && !data.showAscii) {
     data.result = ''
-    return;
+    return
   }
   const rect = resultEl.value.getBoundingClientRect()
   // 判定要展示的长度，算上两位空格
-  let wordLength: number = 0
+  let wordLength = 0
   if (data.showByte) {
     wordLength = 10
   } else if (data.showHex) {

@@ -28,6 +28,7 @@
           </p>
           <article ref="article" class="pb-5 lh-lg text-break text-wrap">
             <slot></slot>
+            <div id="gitalk-container"></div>
           </article>
         </div>
         <div class="col-lg-3 col-md-8 offset-md-4 offset-lg-0">
@@ -41,11 +42,12 @@
 import Layout from '../Layout.vue'
 import Directories from '@/components/blog-layout/Directories.vue'
 import TipList from '@/components/blog-layout/TipList.vue'
-
-import {getCurrentPage, Page} from '../../../pages'
-import {detectDirectories, Directory} from '@/components/blog-layout/directory'
-import {onBeforeMount, onMounted, reactive, ref} from 'vue'
-import {formatDate} from '@/utils/date'
+import 'gitalk/dist/gitalk.css'
+import Gitalk from 'gitalk'
+import { getCurrentPage, Page } from '../../../pages'
+import { detectDirectories, Directory } from '@/components/blog-layout/directory'
+import { onBeforeMount, onMounted, reactive, ref } from 'vue'
+import { formatDate } from '@/utils/date'
 
 const data = reactive<{
   page?: Page
@@ -67,7 +69,19 @@ onMounted(() => {
   observer = new MutationObserver(() => {
     data.directories = detectDirectories(articleEl)
   })
-  observer.observe(articleEl, {childList: true})
+  observer.observe(articleEl, { childList: true })
+
+  // gitalk
+  const gitalk = new Gitalk({
+    clientID: '871627f5ca5ce1607860',
+    clientSecret: 'ca7b42b2794ef51c27148fcdcc1ed8191f3d4470',
+    repo: 'https://github.com/PeakTai/peaktai.github.io',
+    owner: 'PeakTai',
+    admin: ['PeakTai'],
+    id: location.pathname, // Ensure uniqueness and length less than 50
+    distractionFreeMode: false // Facebook-like distraction free mode
+  })
+  gitalk.render('#gitalk-container')
 })
 
 onBeforeMount(() => {
@@ -77,7 +91,8 @@ onBeforeMount(() => {
 })
 </script>
 <style>
-article h3, article h4 {
+article h3,
+article h4 {
   line-height: 2 !important;
 }
 </style>

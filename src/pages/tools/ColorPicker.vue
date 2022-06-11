@@ -10,7 +10,7 @@
       <label class="btn btn-light btn-lg d-block mb-3 py-5">
         <i class="fas fa-image me-2"></i>
         点击选择图片
-        <input type="file" class="d-none" accept="image/*" @change="handleFileChange($event)">
+        <input type="file" class="d-none" accept="image/*" @change="handleFileChange($event)" />
       </label>
 
       <div v-if="rgba" class="row g-3 mb-2 sticky-top">
@@ -26,15 +26,19 @@
         </div>
       </div>
 
-      <canvas v-show="showCanvas" ref="canvas" class="mx-auto d-block w-100 mb-3" @click="pick($event)"></canvas>
-
+      <canvas
+        v-show="showCanvas"
+        ref="canvas"
+        class="mx-auto d-block w-100 mb-3"
+        @click="pick($event)"
+      ></canvas>
     </div>
   </layout>
 </template>
 <script lang="ts">
-import { defineComponent } from "vue";
-import Layout from "@/components/Layout.vue";
-import { showWarning } from "@/utils/message";
+import { defineComponent } from 'vue'
+import Layout from '@/components/Layout.vue'
+import { showWarning } from '@/utils/message'
 
 export default defineComponent({
   components: { Layout },
@@ -43,12 +47,12 @@ export default defineComponent({
       showCanvas: false,
       html: '',
       rgba: '',
-      color: 'white',
+      color: 'white'
     } as {
-      showCanvas: boolean,
-      html: string,
-      rgba: string,
-      color: string,
+      showCanvas: boolean
+      html: string
+      rgba: string
+      color: string
       img?: HTMLImageElement
     }
   },
@@ -74,8 +78,8 @@ export default defineComponent({
         this.img = img
         this.startDraw()
       }
-      img.onerror = (e) => {
-        console.error(e);
+      img.onerror = e => {
+        console.error(e)
         showWarning('读取图片失败')
       }
     },
@@ -130,18 +134,25 @@ export default defineComponent({
       const blue = imageData[2]
       const alpha = imageData[3] / 255
       this.rgba = `rgba(${red},${green},${blue},${parseFloat(alpha.toFixed(2))})`
-      let rgb: { red: number, green: number, blue: number } = alpha >= 1 ? {
-        red, green, blue
-      } : {
-        red: Math.round(255 * alpha + red * (1 - alpha)),
-        green: Math.round(255 * alpha + green * (1 - alpha)),
-        blue: Math.round(255 * alpha + blue * (1 - alpha)),
-      }
+      let rgb: { red: number; green: number; blue: number } =
+        alpha >= 1
+          ? {
+              red,
+              green,
+              blue
+            }
+          : {
+              red: Math.round(255 * alpha + red * (1 - alpha)),
+              green: Math.round(255 * alpha + green * (1 - alpha)),
+              blue: Math.round(255 * alpha + blue * (1 - alpha))
+            }
       if (red === 0 && green === 0 && blue === 0 && alpha === 0) {
         rgb = { red: 255, green: 255, blue: 255 }
       }
-      this.html = `#${this.convertHex(rgb.red)}${this.convertHex(rgb.green)}${this.convertHex(rgb.blue)}`
-      const darkness = 1 - (0.299 * rgb.red + 0.587 * rgb.green + 0.114 * rgb.blue) / 255 > 0.5;
+      this.html = `#${this.convertHex(rgb.red)}${this.convertHex(rgb.green)}${this.convertHex(
+        rgb.blue
+      )}`
+      const darkness = 1 - (0.299 * rgb.red + 0.587 * rgb.green + 0.114 * rgb.blue) / 255 > 0.5
       this.color = darkness ? 'white' : 'black'
     },
     convertHex(num: number): string {
@@ -149,7 +160,7 @@ export default defineComponent({
       if (str.length < 2) {
         str = `0${str}`
       }
-      return str;
+      return str
     }
   }
 })

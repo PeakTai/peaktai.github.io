@@ -1,4 +1,4 @@
-export function getTopRelativeToBody(el: HTMLElement) {
+export function getTopRelativeToBody(el: HTMLElement): number {
   let top = 0
   let offsetEl: Element | null = el
   while (offsetEl && offsetEl instanceof HTMLElement) {

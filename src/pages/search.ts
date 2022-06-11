@@ -1,4 +1,4 @@
-import { Page } from './../../pages';
+import { Page } from './../../pages'
 
 /**
  * 匹配结果，字段都是 html ，匹配成功的关键字部分用 em 标签包裹.
@@ -84,7 +84,8 @@ export function matchPage(page: Page, keyword: string): PageMatchResult {
   const titleMatchResult = matchContent(page.title, keyword)
   const descMatchResult = matchContent(page.desc, keyword)
   const tagsMatchResult = matchContent(originalTags, keyword)
-  const wholeOccurrence = titleMatchResult.occurrence + descMatchResult.occurrence + tagsMatchResult.occurrence
+  const wholeOccurrence =
+    titleMatchResult.occurrence + descMatchResult.occurrence + tagsMatchResult.occurrence
   // 拆解，再拆解，两层拆解
   let matchedWordsCount = 0
   let wordsOccurrence = 0
@@ -123,33 +124,45 @@ export function matchPage(page: Page, keyword: string): PageMatchResult {
     wordsOccurrence += occurrence
   })
   // 生成新的 html
-  const title = titleFrags.map(frag => {
-    if (!frag.highlight) {
-      frag.content = encodeHtml(frag.content)
-    }
-    return frag.content
-  }).join('')
-  const desc = descFrags.map(frag => {
-    if (!frag.highlight) {
-      frag.content = encodeHtml(frag.content)
-    }
-    return frag.content
-  }).join('')
-  const tags = tagsFrags.map(frag => {
-    if (!frag.highlight) {
-      frag.content = encodeHtml(frag.content)
-    }
-    return frag.content
-  }).join('')
+  const title = titleFrags
+    .map(frag => {
+      if (!frag.highlight) {
+        frag.content = encodeHtml(frag.content)
+      }
+      return frag.content
+    })
+    .join('')
+  const desc = descFrags
+    .map(frag => {
+      if (!frag.highlight) {
+        frag.content = encodeHtml(frag.content)
+      }
+      return frag.content
+    })
+    .join('')
+  const tags = tagsFrags
+    .map(frag => {
+      if (!frag.highlight) {
+        frag.content = encodeHtml(frag.content)
+      }
+      return frag.content
+    })
+    .join('')
   return {
-    title, desc, tags, originalPage: page, wholeOccurrence, matchedWordsCount, wordsOccurrence
+    title,
+    desc,
+    tags,
+    originalPage: page,
+    wholeOccurrence,
+    matchedWordsCount,
+    wordsOccurrence
   }
 }
 
-function matchContent(content: string, word: string): { occurrence: number, frags: Fragment[] } {
+function matchContent(content: string, word: string): { occurrence: number; frags: Fragment[] } {
   // 转义word 中的正则字符，然后使用正则拆分，实现忽略大小写匹配
   const escapeRegExp = /(\$|\(|\)|\*|\+|\.|\[|\]|\?|,|\^|\{|\}|\|)/g
-  const escapedWord = word.replace(escapeRegExp, (s) => '\\' + s)
+  const escapedWord = word.replace(escapeRegExp, s => '\\' + s)
   const wordRegExp = new RegExp(escapedWord, 'gi')
   const splits = content.split(wordRegExp)
   const occurrence = splits.length - 1
@@ -159,7 +172,7 @@ function matchContent(content: string, word: string): { occurrence: number, frag
   // 最后贵的内容得使用原内容，而不能是 word
   // 比如 java 匹配了 JAVA，最后显示还得是 JAVA，而不能是 java
   let originalWord = ''
-  content.replace(new RegExp(escapedWord, 'i'), (s) => {
+  content.replace(new RegExp(escapedWord, 'i'), s => {
     originalWord = s
     return s
   })
@@ -180,7 +193,6 @@ function matchContent(content: string, word: string): { occurrence: number, frag
   return { occurrence, frags }
 }
 
-
 /**
  * 匹配给定的页面列表，没有匹配成功的不会出现在结果中.
  * @param pages
@@ -188,8 +200,12 @@ function matchContent(content: string, word: string): { occurrence: number, frag
  * @returns
  */
 export function matchPages(pages: Page[], keyword: string): PageMatchResult[] {
-  return pages.map(page => matchPage(page, keyword))
-    .filter(result => result.wholeOccurrence > 0 || result.matchedWordsCount > 0 || result.wordsOccurrence > 0)
+  return pages
+    .map(page => matchPage(page, keyword))
+    .filter(
+      result =>
+        result.wholeOccurrence > 0 || result.matchedWordsCount > 0 || result.wordsOccurrence > 0
+    )
     .sort((p1, p2) => {
       // 按匹配度排序
       const wholeDiff = p2.wholeOccurrence - p1.wholeOccurrence

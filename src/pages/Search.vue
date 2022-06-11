@@ -3,7 +3,7 @@
     <div v-if="data.status === 'searching'" class="container-xl mt-5">
       <div class="row g-4 mb-5">
         <div class="col-md-4">
-          <h1 class=" m-0"><i class="fas fa-search me-1"></i> 全站搜索</h1>
+          <h1 class="m-0"><i class="fas fa-search me-1"></i> 全站搜索</h1>
         </div>
         <div class="col-md-3">
           <select class="form-select form-select-lg" v-model="data.category" @change="search">
@@ -14,12 +14,20 @@
           </select>
         </div>
         <div class="col-md-5">
-          <input class="form-control form-control-lg" v-model="data.keyword" @input="search" type="search"
-            placeholder="输入关键字过滤页面" maxlength="32" />
+          <input
+            class="form-control form-control-lg"
+            v-model="data.keyword"
+            @input="search"
+            type="search"
+            placeholder="输入关键字过滤页面"
+            maxlength="32"
+          />
         </div>
       </div>
       <div v-if="data.list.length > 20" class="text-secondary mb-3">
-        <small>提示：多个关键字可以使用空格来分隔，以匹配到包含所有关键字的记录，进行更精准的搜索</small>
+        <small
+          >提示：多个关键字可以使用空格来分隔，以匹配到包含所有关键字的记录，进行更精准的搜索</small
+        >
       </div>
       <template v-if="!data.list.length">
         <p class="lead text-md-center">🙁 抱歉，未找到符合条件的页面！</p>
@@ -41,12 +49,17 @@
         </div>
       </div>
     </div>
-    <div v-if="data.status === 'ready'" class="container-xxl mb-5" style="margin-top: 120px;">
+    <div v-if="data.status === 'ready'" class="container-xxl mb-5" style="margin-top: 120px">
       <form @submit.prevent="startSearch">
-        <div class="mx-auto mw-100" style="width: 600px;">
+        <div class="mx-auto mw-100" style="width: 600px">
           <h1 class="text-center mb-4">全站搜索</h1>
           <div class="input-group input-group-lg">
-            <input type="search" class="form-control form-control-lg" placeholder="输入关键字开始搜索" v-model="data.keyword">
+            <input
+              type="search"
+              class="form-control form-control-lg"
+              placeholder="输入关键字开始搜索"
+              v-model="data.keyword"
+            />
             <button class="btn btn-outline-secondary" type="submit">
               <i class="fas fa-search"></i>
             </button>
@@ -60,13 +73,13 @@
 import { reactive } from 'vue'
 import Layout from '@/components/Layout.vue'
 import { PageCategory, pages } from '../../pages'
-import { buildBlankMatchResult, matchPages, PageMatchResult } from './search';
-import { formatDate } from '@/utils/date';
+import { buildBlankMatchResult, matchPages, PageMatchResult } from './search'
+import { formatDate } from '@/utils/date'
 
 const data = reactive<{
-  status: 'ready' | 'searching',
+  status: 'ready' | 'searching'
   category: PageCategory | ''
-  keyword: string,
+  keyword: string
   list: PageMatchResult[]
 }>({
   status: 'ready',
@@ -92,6 +105,5 @@ function search() {
   } else {
     data.list = prePages.map(page => buildBlankMatchResult(page))
   }
-
 }
 </script>
