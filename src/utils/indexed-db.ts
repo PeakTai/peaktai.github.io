@@ -2,6 +2,8 @@
 // 这里为每个表者创建一个库，舍弃了事务、二级索引相关特性，大幅度降低了操作的复杂性，同时也牺牲了非常多的功能
 // 项目中仅仅是存储数据，要求不高，也够用了
 
+import { deepClone } from './object'
+
 export interface Entity {
   id: number
 }
@@ -50,6 +52,10 @@ interface DbStore<T> {
    * 获取记录总数.
    */
   count(): Promise<number>
+  /**
+   * 清除所有记录.
+   */
+  clear(): Promise<void>
 }
 
 class DbStoreImpl<T> implements DbStore<T> {
@@ -58,6 +64,9 @@ class DbStoreImpl<T> implements DbStore<T> {
   constructor(db: IDBDatabase, storeName: string) {
     this.db = db
     this.storeName = storeName
+  }
+  clear(): Promise<void> {
+    return this.wrapRequest(this.getStore().clear())
   }
 
   private getStore(): IDBObjectStore {
@@ -81,7 +90,9 @@ class DbStoreImpl<T> implements DbStore<T> {
   }
 
   async create(data: T): Promise<number> {
-    const id = (await this.wrapRequest(this.getStore().add(data))) as number
+    // data 必须深度克隆，从 vue 组件传过来的对象有可能是 proxy 对象，indexed 本身要做克隆再存储的，proxy 不能克隆，报错
+    // update 方法也是一样，做做深度克隆
+    const id = (await this.wrapRequest(this.getStore().add(deepClone(data)))) as number
     return id
   }
 
@@ -89,7 +100,7 @@ class DbStoreImpl<T> implements DbStore<T> {
     if (!(await this.existsById(id))) {
       return false
     }
-    await this.wrapRequest(this.getStore().put(data, id))
+    await this.wrapRequest(this.getStore().put(deepClone(data), id))
     return true
   }
 

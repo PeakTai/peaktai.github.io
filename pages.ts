@@ -173,6 +173,26 @@ export const pages: Page[] = [
     tags: ['css3', '前端', '饼图', '统计图'],
     rootComponentPath: '@/pages/blogs/Css3Pie.vue',
     createAt: new Date('2022/01/15')
+  },
+  {
+    id: 'blogs/my-views-on-mini-program',
+    title: '我对小程序的一些看法',
+    category: 'blog',
+    desc: '小程序自从出来之后就挺火的，到目前为止小程序的数量已经非常可观了，' +
+      '各个平台都推出了自己的小程序。那么，如果要做一个新项目，我们是否应该考虑开发小程序呢？' +
+      '或者，已有的项目有没有必要改造成小程序？',
+    tags: ['小程序', 'html5', '跨平台开发', 'pwa'],
+    rootComponentPath: '@/pages/blogs/MyViewsOnMiniProgram.vue',
+    createAt: new Date('2022/01/03')
+  },
+  {
+    id: 'blogs/java-bio-nio-aio',
+    title: '几段代码感受 java 中的 bio、nio和aio',
+    category: 'blog',
+    desc: '网上经常看到关于同步和阻塞相关的推送或推荐，解释四种组合。很长一段时间我也搞不明白这些概念，但是似乎也对工作没有任何影响，带着这样的疑问，查阅了很多资料。网上有很多文章都是各种打比方，像排队买饭或是打电话预约等之类的，看了之后感觉更懵了，这里我使用 java 代码直观的展示各种模式。',
+    tags: ['java', 'bio', 'nio', 'aio'],
+    rootComponentPath: '@/pages/blogs/java-bio-nio-aio/Index.vue',
+    createAt: new Date('2022/06/09')
   }
 ]
 

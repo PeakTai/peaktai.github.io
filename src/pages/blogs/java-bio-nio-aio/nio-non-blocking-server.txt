@@ -1,0 +1,51 @@
+// Selector for incoming time requests
+Selector acceptSelector = SelectorProvider.provider().openSelector();
+// Create a new server socket and set to non blocking mode
+// ServerSocketChannel 实现了 SelectableChannel,支持无阻塞
+ServerSocketChannel ssc = ServerSocketChannel.open();
+// 设置为无阻塞模式
+ssc.configureBlocking(false);
+// Bind the server socket to the local host and port
+InetAddress lh = InetAddress.getLocalHost();
+InetSocketAddress isa = new InetSocketAddress(lh, port);
+ssc.socket().bind(isa);
+
+// Register accepts on the server socket with the selector. This
+// step tells the selector that the socket wants to be put on the
+// ready list when accept operations occur, so allowing multiplexed
+// non-blocking I/O to take place.
+// 注册感兴趣的 key: OP_ACCEPT ，当 OP_ACCEPT 操作发生时，
+// 会在下次的 selection operation 中看到（下面的 acceptSelector.select() ）
+SelectionKey acceptKey = ssc.register(acceptSelector, SelectionKey.OP_ACCEPT);
+System.out.println(acceptKey);
+
+// Here's where everything happens. The select method will
+// return when any operations registered above have occurred, the
+// thread has been interrupted, etc.
+// select() 执行一个阻塞的 selection operation ，直到下面的其中一种情况发生：
+// 1. 至少有一个 channel 被选择
+// 2. 当前 selector 实例 的 wakeup 方法被调用
+// 3. 当前线程被中断
+// 这里 selector 会一直阻塞，直到 ssc （ServerSocketChannel）准备接受连接（前面注册了 OP_ACCEPT）
+// while 的条件是 acceptSelector.select() > 0，只要不发生 2 和 3 的情况，循环就会一直进行下去
+while (acceptSelector.select() > 0) {
+  // Someone is ready for I/O, get the ready keys
+  Set<SelectionKey> readyKeys = acceptSelector.selectedKeys();
+  Iterator<SelectionKey> i = readyKeys.iterator();
+  System.out.println("while2");
+  // Walk through the ready keys collection and process date requests.
+  while (i.hasNext()) {
+    SelectionKey sk = i.next();
+    i.remove();
+    // The key indexes into the selector so you
+    // can retrieve the socket that's ready for I/O
+    ServerSocketChannel nextReady = (ServerSocketChannel) sk.channel();
+    // Accept the date request and send back the date string
+    Socket s = nextReady.accept().socket();
+    // Write the current time to the socket
+    PrintWriter out = new PrintWriter(s.getOutputStream(), true);
+    Date now = new Date();
+    out.println(now);
+    out.close();
+  }
+}

@@ -4,5 +4,7 @@ export function formatDate(date?: Date): string {
   }
   const month = date.getMonth() + 1
   const monthStr = month >= 10 ? `${month}` : `0${month}`
-  return `${date.getFullYear()}-${monthStr}-${date.getDate()}`
+  const dayOfMonth = date.getDate()
+  const dayStr = dayOfMonth >= 10 ? `${dayOfMonth}` : `0${dayOfMonth}`
+  return `${date.getFullYear()}-${monthStr}-${dayStr}`
 }

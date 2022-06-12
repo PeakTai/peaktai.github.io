@@ -19,7 +19,7 @@
         </div>
         <div class="col-lg-6 col-md-8">
           <h1 class="pb-2">{{ data.page.title }}</h1>
-          <p class="border-bottom text-secondary pb-2">
+          <p class="text-secondary border-bottom pb-2">
             <small>
               {{ formatDate(data.page.createAt) }}
               &nbsp;&nbsp;
@@ -28,6 +28,20 @@
           </p>
           <article ref="article" class="pb-5 lh-lg text-break text-wrap">
             <slot></slot>
+            <p>
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"
+                ><img
+                  alt="知识共享许可协议"
+                  style="border-width: 0"
+                  src="https://i.creativecommons.org/l/by/4.0/80x15.png"
+              /></a>
+              本作品采用<a
+                rel="license"
+                href="http://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                >知识共享署名 4.0 国际许可协议</a
+              >进行许可。
+            </p>
             <div id="gitalk-container"></div>
           </article>
         </div>
@@ -75,13 +89,13 @@ onMounted(() => {
   const gitalk = new Gitalk({
     clientID: '871627f5ca5ce1607860',
     clientSecret: 'ca7b42b2794ef51c27148fcdcc1ed8191f3d4470',
-    repo: 'https://github.com/PeakTai/peaktai.github.io',
+    repo: 'peaktai.github.io',
     owner: 'PeakTai',
     admin: ['PeakTai'],
     id: location.pathname, // Ensure uniqueness and length less than 50
     distractionFreeMode: false // Facebook-like distraction free mode
   })
-  gitalk.render('#gitalk-container')
+  gitalk.render('gitalk-container')
 })
 
 onBeforeMount(() => {
@@ -94,5 +108,11 @@ onBeforeMount(() => {
 article h3,
 article h4 {
   line-height: 2 !important;
+}
+blockquote {
+  color: rgb(108, 117, 125);
+  padding-left: 1rem !important;
+  border-left: 3px solid rgb(108, 117, 125) !important;
+  margin-bottom: 1rem;
 }
 </style>

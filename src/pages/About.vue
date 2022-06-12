@@ -19,7 +19,7 @@
         <a href="https://github.com/PeakTai/peaktai.github.io">
           https://github.com/PeakTai/peaktai.github.io
         </a>
-        ，希望对你有有用！
+        ，希望对你有用！
       </p>
       <p>
         <strong>

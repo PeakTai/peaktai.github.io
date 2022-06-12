@@ -17,6 +17,7 @@
     </template>
     <pre
       class="bg-light p-3 lh-base"
+      :class="{ 'pre-line': !!props.autoWrap }"
     ><code :class="[data.className]" v-html="data.highlightCode"></code></pre>
   </div>
 </template>
@@ -29,6 +30,9 @@ const props = defineProps({
   code: {
     required: true,
     type: String
+  },
+  autoWrap: {
+    type: Boolean
   },
   language: {
     required: false,
@@ -112,3 +116,8 @@ function copy() {
     })
 }
 </script>
+<style>
+pre.pre-line {
+  white-space: pre-line;
+}
+</style>

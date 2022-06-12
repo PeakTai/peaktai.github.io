@@ -7,8 +7,12 @@
             <input class="form-check-input mt-0" type="checkbox" v-model="param.enabled" />
           </div>
           <template v-if="!props.textOnly">
-            <button class="btn btn-outline-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown"
-              aria-expanded="false">
+            <button
+              class="btn btn-outline-secondary dropdown-toggle"
+              type="button"
+              data-bs-toggle="dropdown"
+              aria-expanded="false"
+            >
               {{ paramType(param.type) }}
             </button>
             <ul class="dropdown-menu">
@@ -20,15 +24,38 @@
               </li>
             </ul>
           </template>
-          <input type="text" class="form-control" placeholder="参数名称" minlength="2" maxlength="128"
-            v-model="param.name" />
+          <input
+            type="text"
+            class="form-control"
+            placeholder="参数名称"
+            minlength="2"
+            maxlength="128"
+            v-model="param.name"
+          />
           <span class="input-group-text">=</span>
-          <input v-show="param.type === 'text'" type="text" class="form-control" placeholder="值" minlength="2"
-            maxlength="128" v-model="param.text" />
-          <input v-show="param.type === 'file'" type="file" class="form-control"
-            @change="handleFileChange($event, param)" />
-          <button class="btn btn-outline-secondary" type="button" @click="del(idx)"
-            :disabled="idx === data.list.length - 1 && !param.name">&times;</button>
+          <input
+            v-show="param.type === 'text'"
+            type="text"
+            class="form-control"
+            placeholder="值"
+            minlength="2"
+            maxlength="128"
+            v-model="param.text"
+          />
+          <input
+            v-show="param.type === 'file'"
+            type="file"
+            class="form-control"
+            @change="handleFileChange($event, param)"
+          />
+          <button
+            class="btn btn-outline-secondary"
+            type="button"
+            @click="del(idx)"
+            :disabled="idx === data.list.length - 1 && !param.name"
+          >
+            &times;
+          </button>
         </div>
       </div>
     </template>
@@ -38,7 +65,8 @@
   </div>
 </template>
 <script setup lang="ts">
-import { computed, PropType, reactive, watch, defineProps, defineEmits } from 'vue'
+import { deepClone } from '@/utils/object'
+import { PropType, reactive, watch, defineProps, defineEmits } from 'vue'
 import { Parameter } from './commons'
 
 const props = defineProps({
@@ -56,11 +84,10 @@ const data = reactive<{
   errMsg: string
   addBtnVisible: boolean
 }>({
-  list: [{ name: '', text: '', type: "text", enabled: true }],
+  list: [{ name: '', text: '', type: 'text', enabled: true }],
   errMsg: '',
   addBtnVisible: true
 })
-
 
 // 避免循环无限更新的标记，header 编辑中有也类似处理
 let preventListUpdate = false
@@ -92,20 +119,20 @@ function updateList() {
     preventListUpdate = false
     return
   }
-  data.list = props.modelValue || []
+  data.list = deepClone(props.modelValue || [])
   inspectList()
 }
 
 function inspectList() {
   if (!data.list.length) {
     preventListUpdate = true
-    data.list.push({ name: '', text: '', type: "text", enabled: true })
+    data.list.push({ name: '', text: '', type: 'text', enabled: true })
     return
   }
   const last = data.list[data.list.length - 1]
   if (last.name) {
     preventListUpdate = true
-    data.list.push({ name: '', text: '', type: "text", enabled: true })
+    data.list.push({ name: '', text: '', type: 'text', enabled: true })
   }
 }
 
@@ -131,6 +158,3 @@ function del(idx: number) {
   data.list.splice(idx, 1)
 }
 </script>
-
-<style scoped>
-</style>

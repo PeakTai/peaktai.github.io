@@ -4,13 +4,32 @@
       <div class="input-group-text">
         <input class="form-check-input mt-0" type="checkbox" v-model="header.enabled" />
       </div>
-      <input type="text" class="form-control" placeholder="header name" minlength="2" maxlength="128"
-        v-model="header.name" list="header-list" />
+      <input
+        type="text"
+        class="form-control"
+        placeholder="header name"
+        minlength="2"
+        maxlength="128"
+        v-model="header.name"
+        list="header-list"
+      />
       <span class="input-group-text">:</span>
-      <input type="text" class="form-control" placeholder="value" minlength="2" maxlength="128"
-        v-model="header.value" />
-      <button class="btn btn-outline-secondary" type="button" @click="del(idx)"
-        :disabled="idx === data.headers.length - 1 && !header.name">&times;</button>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="value"
+        minlength="2"
+        maxlength="128"
+        v-model="header.value"
+      />
+      <button
+        class="btn btn-outline-secondary"
+        type="button"
+        @click="del(idx)"
+        :disabled="idx === data.headers.length - 1 && !header.name"
+      >
+        &times;
+      </button>
     </div>
   </div>
   <div v-if="errMsg" class="mb-3 text-danger d-flex align-items-center">
@@ -30,8 +49,9 @@
 </template>
 
 <script setup lang="ts">
+import { deepClone } from '@/utils/object'
 import { computed, PropType, reactive, watch, defineProps, defineEmits } from 'vue'
-import { Header } from './commons';
+import { Header } from './commons'
 
 const props = defineProps({
   modelValue: {
@@ -87,7 +107,10 @@ watch(
     }
     if (!errMsg.value) {
       preventHeaderUpdate = true
-      emit('update:modelValue', data.headers.filter(header => !!header.name))
+      emit(
+        'update:modelValue',
+        data.headers.filter(header => !!header.name)
+      )
     }
     inspectHeaders()
   },
@@ -99,8 +122,7 @@ function updateHeaders() {
     preventHeaderUpdate = true
     return
   }
-  const { modelValue } = props
-  data.headers = [] = modelValue || []
+  data.headers = deepClone(props.modelValue)
   inspectHeaders()
 }
 
@@ -115,16 +137,6 @@ function inspectHeaders() {
     preventHeaderUpdate = true
     data.headers.push({ name: '', value: '', enabled: true })
   }
-}
-
-function add() {
-  if (data.headers.length) {
-    const last = data.headers[data.headers.length - 1]
-    if (last.name === '') {
-      return
-    }
-  }
-  data.headers.push({ name: '', value: '' })
 }
 
 function del(index: number) {
