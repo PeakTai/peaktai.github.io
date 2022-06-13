@@ -57,7 +57,7 @@
       下图是 tiobe 2022 编程语言排行，太长我只截取了一部分，为了简单不在图中的部分归到 other 中。
     </p>
     <figure>
-      <img src="/assets/blogs/css3-pie/tiobe-2022.png" class="img-fluid" alt="tiobe-2022" />
+      <img src="/assets/blogs/2022/css3-pie/tiobe-2022.png" class="img-fluid" alt="tiobe-2022" />
       <figcaption>toobe-2022</figcaption>
     </figure>
     <p>最后得到的统计数据是这样的：</p>
@@ -84,14 +84,18 @@
     </p>
     <p>
       <img
-        src="/assets/blogs/css3-pie/clip-path-1.png"
+        src="/assets/blogs/2022/css3-pie/clip-path-1.png"
         alt="clip-path 路径说明"
         class="img-fluid"
       />
     </p>
     <p>上面是裁剪的路径流程示意图，中心点是固定的，需要计算出圆弧上的起止的两个坐标点。</p>
     <p>
-      <img src="/assets/blogs/css3-pie/clip-path-2.png" alt="cli-path 角度计算" class="img-fluid" />
+      <img
+        src="/assets/blogs/2022/css3-pie/clip-path-2.png"
+        alt="cli-path 角度计算"
+        class="img-fluid"
+      />
     </p>
     <p>
       按图上的方法来计算坐标点（超出 90
@@ -181,7 +185,7 @@
     <p>最后我们得到一个饼图：</p>
     <p class="text-center">
       <img
-        src="/assets/blogs/css3-pie/rendering-1.png"
+        src="/assets/blogs/2022/css3-pie/rendering-1.png"
         alt="效果图"
         class="img-fluid"
         style="height: 250px"
@@ -251,7 +255,10 @@
       看看最终的效果（将鼠标放上去会有交互效果，ie
       和很多移动端浏览器由于兼容性问题可能看不到效果）：
     </p>
-    <iframe src="/assets/blogs/css3-pie/css3-pie.html" style="width: 100%; height: 380px"></iframe>
+    <iframe
+      src="/assets/blogs/2022/css3-pie/css3-pie.html"
+      style="width: 100%; height: 380px"
+    ></iframe>
     <h3>总结</h3>
     <p>
       使用 css3 实现饼图整体上比基于 canvas 简单一些，毕竟基于 canvas
@@ -260,7 +267,7 @@
       裁剪的兼容性不是很好，ie 就别想了，移动端很多浏览器也不支持，使用需谨慎。
     </p>
     <p>
-      最后附上完整代码，<a target="_blank" href="/assets/blogs/css3-pie/css3-pie.html"
+      最后附上完整代码，<a target="_blank" href="/assets/blogs/2022/css3-pie/css3-pie.html"
         >点击此处可下载 html 文件</a
       >。
     </p>

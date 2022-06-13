@@ -25,11 +25,11 @@
               <i class="fas fa-tools me-1"></i>在线工具
             </a>
           </li>
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" :class="{ active: isBelongsToCategory('demo') }" href="/demos.html">
               <i class="fas fa-code me-1"></i>在线演示
             </a>
-          </li>
+          </li> -->
           <li class="nav-item">
             <a
               class="nav-link"

@@ -17,7 +17,7 @@
       ，安装插件来支持小程序的代码提示，然后在微信开发者工具上预览。工具上的问题倒不大，代码提示该有的都有了，开发效率关键还得看框架和库。
     </p>
     <p>
-      微信小程序是支持　typescript 的，官网提供了类型库，可以通过开发者工具直接创建 ts
+      微信小程序是支持 typescript 的，官网提供了类型库，可以通过开发者工具直接创建 ts
       项目。百度小程序目前是不支持的，效率就要低很多。
     </p>
     <p>
@@ -45,7 +45,7 @@
     </p>
     <p>
       <img
-        src="/assets/blogs/my-views-on-mini-program/yesterday's-statistics.png"
+        src="/assets/blogs/2022/my-views-on-mini-program/yesterday's-statistics.png"
         alt="小程序统计"
         class="img-fluid"
       />

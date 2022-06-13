@@ -1,0 +1,22 @@
+<template>
+  <div>
+    <pre>{{ data.user }}</pre>
+    <p>
+      <button type="button" @click="changeAge"> change age</button>
+    </p>
+  </div>
+</template>
+<script setup lang="ts">import { reactive } from 'vue';
+const user = { name: 'Tony', age: 44 }
+
+const data = reactive({
+  user: { name: '', age: 1 }
+})
+
+data.user = user
+
+function changeAge() {
+  user.age = Math.round(Math.random() * 100)
+  data.user = user
+}
+</script>

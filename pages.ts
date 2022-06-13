@@ -149,7 +149,7 @@ export const pages: Page[] = [
       'TreeMap 优化，JMX 配置增强，windows 版本免去环境变量配置，废弃偏向锁，弱算法警告，' +
       'krb5.conf 支持 canonicalize，增加新的系统属性用于配置 TLS 签名模式 ',
     tags: ['java', '隐藏类'],
-    rootComponentPath: '@/pages/blogs/Java15Features.vue',
+    rootComponentPath: '@/pages/blogs/2022/Java15Features.vue',
     createAt: new Date('2022/05/18')
   },
   {
@@ -160,7 +160,7 @@ export const pages: Page[] = [
       '删除部分废弃的线程方法，ZGC 支持 Windows 和 Mac os，G1 支持 NUMA-Aware 内存分配，' +
       'Parallel GC 优化，JFR 支持事件消费可用于记录进程外的记录',
     tags: ['java', 'record', 'gc', '线程'],
-    rootComponentPath: '@/pages/blogs/Java14Features.vue',
+    rootComponentPath: '@/pages/blogs/2022/Java14Features.vue',
     createAt: new Date('2022/04/16')
   },
   {
@@ -171,7 +171,7 @@ export const pages: Page[] = [
       '使用 css3 的渐变背景或路径裁切也一样可以实现同样的效果，渐变背景可以实现较为简单的基础效果，' +
       '路径裁切则能够实现比较强大的交互效果，只是路径裁切兼容性目前不是太好',
     tags: ['css3', '前端', '饼图', '统计图'],
-    rootComponentPath: '@/pages/blogs/Css3Pie.vue',
+    rootComponentPath: '@/pages/blogs/2022/Css3Pie.vue',
     createAt: new Date('2022/01/15')
   },
   {
@@ -181,8 +181,8 @@ export const pages: Page[] = [
     desc: '小程序自从出来之后就挺火的，到目前为止小程序的数量已经非常可观了，' +
       '各个平台都推出了自己的小程序。那么，如果要做一个新项目，我们是否应该考虑开发小程序呢？' +
       '或者，已有的项目有没有必要改造成小程序？',
-    tags: ['小程序', 'html5', '跨平台开发', 'pwa'],
-    rootComponentPath: '@/pages/blogs/MyViewsOnMiniProgram.vue',
+    tags: ['微信', '小程序', 'html5', '跨平台开发', 'pwa'],
+    rootComponentPath: '@/pages/blogs/2022/MyViewsOnMiniProgram.vue',
     createAt: new Date('2022/01/03')
   },
   {
@@ -191,8 +191,44 @@ export const pages: Page[] = [
     category: 'blog',
     desc: '网上经常看到关于同步和阻塞相关的推送或推荐，解释四种组合。很长一段时间我也搞不明白这些概念，但是似乎也对工作没有任何影响，带着这样的疑问，查阅了很多资料。网上有很多文章都是各种打比方，像排队买饭或是打电话预约等之类的，看了之后感觉更懵了，这里我使用 java 代码直观的展示各种模式。',
     tags: ['java', 'bio', 'nio', 'aio'],
-    rootComponentPath: '@/pages/blogs/java-bio-nio-aio/Index.vue',
+    rootComponentPath: '@/pages/blogs/2022/java-bio-nio-aio/Index.vue',
     createAt: new Date('2022/06/09')
+  },
+  {
+    id: 'blogs/vue3-array-not-reactive',
+    title: '记一次 vue3 数组不响应问题的排查',
+    category: 'blog',
+    desc: '最近在编程时，遇到了 vue3 数组更新却没有响应的问题，解决后，决定把这次的问题总结下，然后记录下来',
+    tags: ['vue3', '前端'],
+    rootComponentPath: '@/pages/blogs/2022/vue3-array-not-reactive/Index.vue',
+    createAt: new Date('2022/06/12')
+  },
+  {
+    id: 'blogs/query-count',
+    title: '分页查询的 count 问题',
+    category: 'blog',
+    desc: 'Web应用的业务中常常会有分页查询的功能，让用户可以直观的看到匹配记录的数量，自由跳页快速翻看后面的数据。但是分页查询在数据量大和并发量较大时，往往会有比较严重的性能问题，' +
+      '分页查询一般会使用 select count(*) 求总数，offset 实现跳页，问题常常出在这里',
+    tags: ['sql', '数据库'],
+    rootComponentPath: '@/pages/blogs/2022/QueryCount.vue',
+    createAt: new Date('2022/01/02')
+  },
+  {
+    id: 'blogs/improve-the-efficiency-of-small-teams',
+    title: '小型开发团队如何提高生产力',
+    category: 'blog',
+    desc: '对于小规模的技术团队，人力有限却有众多繁杂的事情要处理，怎么样更有效的利用资源，提高开发效率呢？这篇文章我分享一些自己的看法。',
+    rootComponentPath: '@/pages/blogs/2022/ImproveTheEfficiencyOfSmallTeams.vue',
+    createAt: new Date('2022/01/16')
+  },
+  {
+    id: 'blogs/wechat-moments-dbd',
+    title: '类似微信朋友圈业务的数据库表结构设计',
+    category: 'blog',
+    tags: ['微信', '数据库'],
+    desc: '今天聊一下类似微信朋友圈这样的业务该怎么设计数据库的表结构，纯个人观点，希望能够提供一点参考价值',
+    rootComponentPath: '@/pages/blogs/2022/WechatMomentsDbd.vue',
+    createAt: new Date('2022/02/13')
   }
 ]
 

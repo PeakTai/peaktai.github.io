@@ -163,6 +163,6 @@
   </blog-layout>
 </template>
 <script lang="ts" setup>
-import BlogLayout from '../../components/blog-layout/BlogLayout.vue'
+import BlogLayout from '@/components/blog-layout/BlogLayout.vue'
 import CodeHighlight from '@/components/CodeHighlight.vue'
 </script>

@@ -39,8 +39,9 @@
             <h3 v-html="page.title" class="text-wrap text-break"></h3>
             <p class="mb-1 text-secondary text-wrap text-break">
               <small>
-                {{ formatDate(page.originalPage.createAt) }}
-                &nbsp;&nbsp;
+                <span v-if="page.originalPage.createAt">
+                  {{ formatDate(page.originalPage.createAt) }}&nbsp;&nbsp;
+                </span>
                 <span v-html="page.tags"></span>
               </small>
             </p>
