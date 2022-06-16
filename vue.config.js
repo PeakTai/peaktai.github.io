@@ -6,6 +6,7 @@ module.exports = {
   parallel: true,
   lintOnSave: true,
   outputDir: '/docs',
+  runtimeCompiler: true,
   pages,
   chainWebpack: config => {
     const fontsRule = config.module.rule('fonts')
@@ -25,7 +26,7 @@ module.exports = {
     // raw Loader
     config.module
       .rule('text')
-      .test(/\.txt$/)
+      .test(/\.(txt|md)$/)
       .use('raw-loader')
       .loader('raw-loader')
       .end()

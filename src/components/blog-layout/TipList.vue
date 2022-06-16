@@ -9,7 +9,7 @@
 </template>
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
-import { Page, pages } from '../../../pages'
+import { Page, pages } from '@/config'
 
 export default defineComponent({
   props: {

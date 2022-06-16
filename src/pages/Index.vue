@@ -23,7 +23,7 @@
         <div class="col-md-7 col-lg-8">
           <input
             class="form-control form-control-lg mb-4"
-            placeholder="🔎 输入关键字过滤文章"
+            placeholder="🔎 输入关键字过滤文章，多个关键字空格分隔"
             v-model="data.keyword"
             maxlength="32"
           />
@@ -57,7 +57,7 @@
 </template>
 <script lang="ts" setup>
 import Layout from '../components/Layout.vue'
-import { Page, pages } from '../../pages'
+import { Page, pages } from '@/config'
 import { computed, reactive } from 'vue'
 import { formatDate } from '@/utils/date'
 import { PageMatchResult, buildBlankMatchResult, matchPages } from './search'

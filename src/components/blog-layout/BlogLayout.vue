@@ -4,13 +4,8 @@
     <div class="container-xxl mt-5">
       <div class="row g-3">
         <div class="col-lg-3 col-md-4">
-          <a
-            v-if="data.directories.length"
-            class="btn btn-outline-secondary d-block d-md-none mb-4"
-            data-bs-toggle="collapse"
-            href="#collapse-sm-article-directories"
-            role="button"
-          >
+          <a v-if="data.directories.length" class="btn btn-outline-secondary d-block d-md-none mb-4"
+            data-bs-toggle="collapse" href="#collapse-sm-article-directories" role="button">
             <i class="fas fa-list-ol me-2"></i>文章目录（{{ data.directories.length }}）
           </a>
           <div class="collapse d-md-block sticky-md-top" id="collapse-sm-article-directories">
@@ -29,18 +24,10 @@
           <article ref="article" class="pb-5 lh-lg text-break text-wrap">
             <slot></slot>
             <p>
-              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"
-                ><img
-                  alt="知识共享许可协议"
-                  style="border-width: 0"
-                  src="https://i.creativecommons.org/l/by/4.0/80x15.png"
-              /></a>
-              本作品采用<a
-                rel="license"
-                href="http://creativecommons.org/licenses/by/4.0/"
-                target="_blank"
-                >知识共享署名 4.0 国际许可协议</a
-              >进行许可。
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img alt="知识共享许可协议"
+                  style="border-width: 0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
+              本作品采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">知识共享署名 4.0
+                国际许可协议</a>进行许可。
             </p>
             <div id="gitalk-container"></div>
           </article>
@@ -58,7 +45,7 @@ import Directories from '@/components/blog-layout/Directories.vue'
 import TipList from '@/components/blog-layout/TipList.vue'
 import 'gitalk/dist/gitalk.css'
 import Gitalk from 'gitalk'
-import { getCurrentPage, Page } from '../../../pages'
+import { getCurrentPage, Page } from '@/config'
 import { detectDirectories, Directory } from '@/components/blog-layout/directory'
 import { onBeforeMount, onMounted, reactive, ref } from 'vue'
 import { formatDate } from '@/utils/date'
@@ -109,6 +96,7 @@ article h3,
 article h4 {
   line-height: 2 !important;
 }
+
 blockquote {
   color: rgb(108, 117, 125);
   padding-left: 1rem !important;

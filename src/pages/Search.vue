@@ -19,7 +19,7 @@
             v-model="data.keyword"
             @input="search"
             type="search"
-            placeholder="输入关键字过滤页面"
+            placeholder="输入关键字过滤页面，多个关键字空格分隔"
             maxlength="32"
           />
         </div>
@@ -73,7 +73,7 @@
 <script lang="ts" setup>
 import { reactive } from 'vue'
 import Layout from '@/components/Layout.vue'
-import { PageCategory, pages } from '../../pages'
+import { PageCategory, pages } from '@/config'
 import { buildBlankMatchResult, matchPages, PageMatchResult } from './search'
 import { formatDate } from '@/utils/date'
 

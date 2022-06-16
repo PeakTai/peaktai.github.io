@@ -1,9 +1,11 @@
 <template>
-  <div class="text-secondary">
+  <div class="text-secondary overflow-auto" style="max-height: 100vh">
     <template v-for="(directory, idx) in directories" :key="directory.top">
       <p
         :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === undefined }"
         @click="scrollToDirectory(directory)"
+        class="text-truncate"
+        :title="directory.name"
       >
         {{ directory.name }}
       </p>
@@ -11,7 +13,8 @@
         v-for="(subDirectory, subIdx) in directory.subdirectories"
         :key="subDirectory.name"
         :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === subIdx }"
-        class="ps-3"
+        class="ps-3 text-truncate"
+        :title="directory.name"
         @click="scrollToDirectory(subDirectory)"
       >
         {{ subDirectory.name }}

@@ -1,4 +1,4 @@
-import { Page } from './../../pages'
+import { Page } from '@/config'
 
 /**
  * 匹配结果，字段都是 html ，匹配成功的关键字部分用 em 标签包裹.

@@ -56,7 +56,7 @@
 </template>
 <script lang="ts" setup>
 import { reactive } from 'vue'
-import { getCurrentPage, PageCategory } from '../../pages'
+import { getCurrentPage, PageCategory } from '@/config'
 
 const data = reactive({ page: getCurrentPage() })
 
