@@ -5,7 +5,7 @@ module.exports = {
   filenameHashing: false,
   parallel: true,
   lintOnSave: true,
-  outputDir: '/docs',
+  outputDir: './docs',
   runtimeCompiler: true,
   pages,
   chainWebpack: config => {

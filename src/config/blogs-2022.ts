@@ -2,7 +2,7 @@ import { Page } from './page'
 
 export const blog2022Pages: Page[] = [
   {
-    id: 'blogs/java15-features',
+    id: 'blogs/2022/java15-features',
     title: 'Java 15 的主要更新内容',
     category: 'blog',
     desc:
@@ -14,7 +14,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/05/18')
   },
   {
-    id: 'blogs/java14-features',
+    id: 'blogs/2022/java14-features',
     title: 'Java 14 的主要更新内容',
     category: 'blog',
     desc:
@@ -26,7 +26,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/04/15')
   },
   {
-    id: 'blogs/css3-pie',
+    id: 'blogs/2022/css3-pie',
     title: '用 css3 实现饼图',
     category: 'blog',
     desc:
@@ -38,7 +38,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/01/15')
   },
   {
-    id: 'blogs/my-views-on-mini-program',
+    id: 'blogs/2022/my-views-on-mini-program',
     title: '我对小程序的一些看法',
     category: 'blog',
     desc:
@@ -50,7 +50,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/01/03')
   },
   {
-    id: 'blogs/java-bio-nio-aio',
+    id: 'blogs/2022/java-bio-nio-aio',
     title: '几段代码感受 java 中的 bio、nio和aio',
     category: 'blog',
     desc: '网上经常看到关于同步和阻塞相关的推送或推荐，解释四种组合。很长一段时间我也搞不明白这些概念，但是似乎也对工作没有任何影响，带着这样的疑问，查阅了很多资料。网上有很多文章都是各种打比方，像排队买饭或是打电话预约等之类的，看了之后感觉更懵了，这里我使用 java 代码直观的展示各种模式。',
@@ -59,7 +59,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/06/09')
   },
   {
-    id: 'blogs/vue3-array-not-reactive',
+    id: 'blogs/2022/vue3-array-not-reactive',
     title: '记一次 vue3 数组不响应问题的排查',
     category: 'blog',
     desc: '最近在编程时，遇到了 vue3 数组更新却没有响应的问题，解决后，决定把这次的问题总结下，然后记录下来',
@@ -68,7 +68,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/06/12')
   },
   {
-    id: 'blogs/query-count',
+    id: 'blogs/2022/query-count',
     title: '分页查询的 count 问题',
     category: 'blog',
     desc:
@@ -79,7 +79,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/01/02')
   },
   {
-    id: 'blogs/improve-the-efficiency-of-small-teams',
+    id: 'blogs/2022/improve-the-efficiency-of-small-teams',
     title: '小型开发团队如何提高生产力',
     category: 'blog',
     desc: '对于小规模的技术团队，人力有限却有众多繁杂的事情要处理，怎么样更有效的利用资源，提高开发效率呢？这篇文章我分享一些自己的看法。',
@@ -87,7 +87,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/01/16')
   },
   {
-    id: 'blogs/wechat-moments-dbd',
+    id: 'blogs/2022/wechat-moments-dbd',
     title: '类似微信朋友圈业务的数据库表结构设计',
     category: 'blog',
     tags: ['微信', '数据库'],
@@ -96,7 +96,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/02/13')
   },
   {
-    id: 'blogs/java13-features',
+    id: 'blogs/2022/java13-features',
     title: 'Java 13 主要更新内容',
     category: 'blog',
     tags: ['java', 'unicode', 'zgc'],
@@ -105,7 +105,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/04/09')
   },
   {
-    id: 'blogs/java9-features',
+    id: 'blogs/2022/java9-features',
     title: 'Java 9 主要更新内容',
     category: 'blog',
     tags: ['java', '模块系统', 'VarHandle', 'gc', 'jshell', 'applet'],
@@ -117,7 +117,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/03/02')
   },
   {
-    id: 'blogs/java10-features',
+    id: 'blogs/2022/java10-features',
     title: 'Java 10 主要更新内容',
     category: 'blog',
     tags: ['java', 'docker', 'g1', 'gc', 'BCP', 'jshell'],
@@ -129,7 +129,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/03/09')
   },
   {
-    id: 'blogs/java11-features',
+    id: 'blogs/2022/java11-features',
     title: 'Java 11 主要更新内容',
     category: 'blog',
     tags: ['java', 'zgc', 'JavaFx'],
@@ -140,7 +140,7 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/03/21')
   },
   {
-    id: 'blogs/java12-features',
+    id: 'blogs/2022/java12-features',
     title: 'Java 12 主要更新内容',
     category: 'blog',
     tags: ['java'],
