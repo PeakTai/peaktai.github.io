@@ -4,15 +4,20 @@
     <div class="container-xxl mt-5">
       <div class="row g-3">
         <div class="col-lg-3 col-md-4">
-          <a v-if="data.directories.length" class="btn btn-outline-secondary d-block d-md-none mb-4"
-            data-bs-toggle="collapse" href="#collapse-sm-article-directories" role="button">
+          <a
+            v-if="data.directories.length"
+            class="btn btn-outline-secondary d-block d-md-none mb-4"
+            data-bs-toggle="collapse"
+            href="#collapse-sm-article-directories"
+            role="button"
+          >
             <i class="fas fa-list-ol me-2"></i>文章目录（{{ data.directories.length }}）
           </a>
           <div class="collapse d-md-block sticky-md-top" id="collapse-sm-article-directories">
             <directories :directories="data.directories"></directories>
           </div>
         </div>
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-7 col-md-8">
           <h1 class="pb-2">{{ data.page.title }}</h1>
           <p class="text-secondary border-bottom pb-2">
             <small>
@@ -24,16 +29,28 @@
           <article ref="article" class="pb-5 lh-lg text-break text-wrap">
             <slot></slot>
             <p>
-              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"><img alt="知识共享许可协议"
-                  style="border-width: 0" src="https://i.creativecommons.org/l/by/4.0/80x15.png" /></a>
-              本作品采用<a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank">知识共享署名 4.0
-                国际许可协议</a>进行许可。
+              <a rel="license" href="http://creativecommons.org/licenses/by/4.0/" target="_blank"
+                ><img
+                  alt="知识共享许可协议"
+                  style="border-width: 0"
+                  src="https://i.creativecommons.org/l/by/4.0/80x15.png"
+              /></a>
+              本作品采用<a
+                rel="license"
+                href="http://creativecommons.org/licenses/by/4.0/"
+                target="_blank"
+                >知识共享署名 4.0 国际许可协议</a
+              >进行许可。
             </p>
-            <div id="gitalk-container"></div>
           </article>
         </div>
-        <div class="col-lg-3 col-md-8 offset-md-4 offset-lg-0">
+        <div class="col-lg-2 col-md-8 offset-md-4 offset-lg-0">
           <tip-list :page="data.page" class="sticky-lg-top"></tip-list>
+        </div>
+      </div>
+      <div class="row g-3">
+        <div class="col-lg-7 col-md-8 offset-lg-3 offset-md-4">
+          <div id="gitalk-container"></div>
         </div>
       </div>
     </div>

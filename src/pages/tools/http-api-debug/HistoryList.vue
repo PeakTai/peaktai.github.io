@@ -88,7 +88,7 @@
                       class="btn btn-outline-secondary btn-sm me-2"
                       @click="sendRequestAgain(his)"
                     >
-                      再次发送请求
+                      使用此记录
                     </button>
                   </div>
                 </div>

@@ -12,7 +12,7 @@
               v-for="tag in data.tags"
               :key="tag.name"
               :class="{ active: data.tag === tag.name }"
-              @click="data.tag = tag.name"
+              @click="toggleTag(tag.name)"
               type="button"
               class="btn btn-outline-secondary btn-sm mb-2 me-2"
             >
@@ -42,7 +42,7 @@
                     <span v-html="article.tags"></span>
                   </small>
                 </p>
-                <p v-html="article.desc" class="text-wrap text-break"></p>
+                <p class="text-wrap text-break">{{ article.desc }}</p>
               </a>
             </div>
           </template>
@@ -117,4 +117,12 @@ data.articles.forEach(article => {
 tagMap.forEach((value, key) => {
   data.tags.push({ name: key, count: value })
 })
+
+function toggleTag(tag: string) {
+  if (data.tag && data.tag === tag) {
+    data.tag = ''
+    return
+  }
+  data.tag = tag
+}
 </script>

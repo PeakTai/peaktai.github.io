@@ -33,7 +33,7 @@ export const blog2022Pages: Page[] = [
       '开发中常常有做统计图的需求，主流的前端插件都是基于 canvas 来做的，' +
       '使用 css3 的渐变背景或路径裁切也一样可以实现同样的效果，渐变背景可以实现较为简单的基础效果，' +
       '路径裁切则能够实现比较强大的交互效果，只是路径裁切兼容性目前不是太好',
-    tags: ['css3', '前端', '饼图', '统计图'],
+    tags: ['css', '前端', '饼图', '统计图'],
     rootComponentPath: '@/pages/blogs/2022/Css3Pie.vue',
     createAt: new Date('2022/01/15')
   },
@@ -127,5 +127,38 @@ export const blog2022Pages: Page[] = [
       '增强在 docker 容器中的可配置性，jshell 启动速度提升',
     rootComponentPath: '@/pages/blogs/2022/java-10-features.md',
     createAt: new Date('2022/03/09')
+  },
+  {
+    id: 'blogs/java11-features',
+    title: 'Java 11 主要更新内容',
+    category: 'blog',
+    tags: ['java', 'zgc', 'JavaFx'],
+    desc:
+      '全新的 Http 客户端，新增 ZGC 和 Epsilon 回收器，引入巢（nest）解决嵌套访问取消桥接方式，lambda 增加了对 var 的支持，' +
+      '支持像动态语言那样直接从源码文件启动，删除 JavaFX，删除已经废弃的线程方法',
+    rootComponentPath: '@/pages/blogs/2022/java-11-features.md',
+    createAt: new Date('2022/03/21')
+  },
+  {
+    id: 'blogs/java12-features',
+    title: 'Java 12 主要更新内容',
+    category: 'blog',
+    tags: ['java'],
+    desc:
+      '支持 unicode 11，支持 POSIX_SPAWN 创建进程，引入 JVM 常量 API，数字格式化支持短格式，' +
+      '支持日本新年号（令和）字符，switch 表达式语法进一步增强',
+    rootComponentPath: '@/pages/blogs/2022/java-12-features.md',
+    createAt: new Date('2022/03/29')
+  },
+  {
+    id: 'blogs/2022/css-background-positon-ppercentage',
+    title: '记一次 css background-position 遇到的坑',
+    category: 'blog',
+    tags: ['css', '前端'],
+    desc:
+      'background-position ， 一看名字就是设置背景位置的，第一反应就是和 position 差不多，然而设置了 left 和 top 却没有和我预想的一样，' +
+      '总是调不到想要的位置，查了很多资料才搞明白',
+    rootComponentPath: '@/pages/blogs/2022/css-background-positon-ppercentage.md',
+    createAt: new Date('2022/02/16')
   }
 ]

@@ -36,22 +36,16 @@
     {{ errMsg }}
   </div>
   <datalist id="header-list">
-    <option value="accept" />
-    <option value="accept-encoding" />
-    <option value="accept-Language" />
-    <option value="authorization" />
-    <option value="accept-charset" />
-    <option value="cache-control" />
-    <option value="connection" />
-    <option value="expect" />
-    <!-- TODO 将曾经用过的 header 存储起来用于提示快速输入 -->
+    <option v-for="name in data.suggestedNames" :key="name" :value="name" />
   </datalist>
 </template>
 
 <script setup lang="ts">
+import { showWarning } from '@/utils/message'
 import { deepClone } from '@/utils/object'
-import { computed, PropType, reactive, watch, defineProps, defineEmits } from 'vue'
+import { computed, PropType, reactive, watch, defineProps, defineEmits, onBeforeUnmount } from 'vue'
 import { Header } from './commons'
+import { listHistory, onHistoryChange, History, offHistoryChange } from './history'
 
 const props = defineProps({
   modelValue: {
@@ -62,14 +56,11 @@ const props = defineProps({
 })
 const emit = defineEmits(['update:modelValue'])
 
-const data = reactive<{
-  headers: Header[]
-  errMsg: string
-  addBtnVisible: boolean
-}>({
-  headers: [],
+const data = reactive({
+  headers: [] as Header[],
   errMsg: '',
-  addBtnVisible: true
+  addBtnVisible: true,
+  suggestedNames: [] as string[]
 })
 
 const errMsg = computed<string>(() => {
@@ -93,20 +84,39 @@ const errMsg = computed<string>(() => {
   }
   return ''
 })
-// headers 避免无比循环标记，用于防止无限循环和减少消耗
-// 组件中更新事件触发后，调用处 v-model 绑定的 headers 就会更新，导致该组件中的 propData 更新进而又导致 headers 的更新继续触发事件，造成无限循环
-let preventHeaderUpdate = false
+
+// datalist 建议名称
+function extractHeaderNamesFromHistory(list: History[]): void {
+  data.suggestedNames = Array.from(
+    new Set(
+      list
+        .flatMap(item => item.headers)
+        .filter(item => !!item.name)
+        .map(item => item.name)
+        .concat(
+          'accept',
+          'accept-encoding',
+          'accept-Language',
+          'authorization',
+          'accept-charset',
+          'cache-control',
+          'connection',
+          'expect'
+        )
+    )
+  )
+}
+
+listHistory().then(extractHeaderNamesFromHistory).catch(showWarning)
+onHistoryChange(extractHeaderNamesFromHistory)
+onBeforeUnmount(() => offHistoryChange(extractHeaderNamesFromHistory))
+
 updateHeaders()
 watch(() => props.modelValue, updateHeaders)
 watch(
   () => data.headers,
   () => {
-    if (preventHeaderUpdate) {
-      preventHeaderUpdate = false
-      return
-    }
     if (!errMsg.value) {
-      preventHeaderUpdate = true
       emit(
         'update:modelValue',
         data.headers.filter(header => !!header.name)
@@ -118,8 +128,7 @@ watch(
 )
 
 function updateHeaders() {
-  if (preventHeaderUpdate) {
-    preventHeaderUpdate = true
+  if (props.modelValue === data.headers) {
     return
   }
   data.headers = deepClone(props.modelValue)
@@ -128,13 +137,11 @@ function updateHeaders() {
 
 function inspectHeaders() {
   if (!data.headers.length) {
-    preventHeaderUpdate = true
     data.headers.push({ name: '', value: '', enabled: true })
     return
   }
   const last = data.headers[data.headers.length - 1]
   if (last.name) {
-    preventHeaderUpdate = true
     data.headers.push({ name: '', value: '', enabled: true })
   }
 }

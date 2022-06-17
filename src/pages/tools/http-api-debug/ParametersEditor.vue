@@ -31,6 +31,7 @@
             minlength="2"
             maxlength="128"
             v-model="param.name"
+            list="parameter-name-list"
           />
           <span class="input-group-text">=</span>
           <input
@@ -41,6 +42,7 @@
             minlength="2"
             maxlength="128"
             v-model="param.text"
+            list="parameter-value-list"
           />
           <input
             v-show="param.type === 'file'"
@@ -59,15 +61,20 @@
         </div>
       </div>
     </template>
-    <datalist id="parameter-list">
-      <!-- TODO 将曾经用过的 header 存储起来用于提示快速输入 -->
+    <datalist id="parameter-name-list">
+      <option v-for="name in data.suggestedNames" :key="name" :value="name" />
+    </datalist>
+    <datalist id="parameter-value-list">
+      <option v-for="name in data.suggestedValues" :key="name" :value="name" />
     </datalist>
   </div>
 </template>
 <script setup lang="ts">
+import { showWarning } from '@/utils/message'
 import { deepClone } from '@/utils/object'
-import { PropType, reactive, watch, defineProps, defineEmits } from 'vue'
+import { PropType, reactive, watch, defineProps, defineEmits, onBeforeUnmount } from 'vue'
 import { Parameter } from './commons'
+import { listHistory, onHistoryChange, History, offHistoryChange } from './history'
 
 const props = defineProps({
   textOnly: {
@@ -79,27 +86,42 @@ const props = defineProps({
   }
 })
 const emit = defineEmits(['update:modelValue'])
-const data = reactive<{
-  list: Parameter[]
-  errMsg: string
-  addBtnVisible: boolean
-}>({
-  list: [{ name: '', text: '', type: 'text', enabled: true }],
+const data = reactive({
+  list: [{ name: '', text: '', type: 'text', enabled: true }] as Parameter[],
   errMsg: '',
-  addBtnVisible: true
+  addBtnVisible: true,
+  suggestedNames: [] as string[],
+  suggestedValues: [] as string[]
 })
 
-// 避免循环无限更新的标记，header 编辑中有也类似处理
-let preventListUpdate = false
+// 从历史记录中提取使用过的参数名称
+function extractHistory(list: History[]) {
+  data.suggestedNames = Array.from(
+    new Set(
+      list
+        .flatMap(item => item.parameters)
+        .filter(item => !!item.name)
+        .map(item => item.name)
+    )
+  )
+  data.suggestedValues = Array.from(
+    new Set(
+      list
+        .flatMap(item => item.parameters)
+        .filter(item => !!item.name && !!item.text)
+        .map(item => item.text)
+    )
+  )
+}
+
+listHistory().then(extractHistory).catch(showWarning)
+onHistoryChange(extractHistory)
+onBeforeUnmount(() => offHistoryChange(extractHistory))
+
 watch(() => props.modelValue, updateList)
 watch(
   () => data.list,
   () => {
-    if (preventListUpdate) {
-      preventListUpdate = false
-      return
-    }
-    preventListUpdate = true
     emit(
       'update:modelValue',
       data.list.filter(param => {
@@ -115,8 +137,7 @@ watch(
 )
 
 function updateList() {
-  if (preventListUpdate) {
-    preventListUpdate = false
+  if (data.list === props.modelValue) {
     return
   }
   data.list = deepClone(props.modelValue || [])
@@ -125,13 +146,11 @@ function updateList() {
 
 function inspectList() {
   if (!data.list.length) {
-    preventListUpdate = true
     data.list.push({ name: '', text: '', type: 'text', enabled: true })
     return
   }
   const last = data.list[data.list.length - 1]
   if (last.name) {
-    preventListUpdate = true
     data.list.push({ name: '', text: '', type: 'text', enabled: true })
   }
 }
