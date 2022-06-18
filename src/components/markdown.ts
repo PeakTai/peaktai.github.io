@@ -1,17 +1,15 @@
 import { Component, defineComponent } from 'vue'
 import BlogLayout from '@/components/blog-layout/BlogLayout.vue'
 import Layout from '@/components/Layout.vue'
-import { marked } from 'marked'
-import hljs from 'highlight.js'
 import 'highlight.js/styles/github.css'
 
-function build(raw: string, blog = false): Component {
-  const html = marked(raw, {
-    highlight: (code, language) => {
-      const validLanguage = hljs.getLanguage(language) ? language : 'plaintext'
-      return hljs.highlight(validLanguage, code).value
-    }
-  })
+/**
+ * 构建组件，在改为使用加载器后，引用的 markdown 会被转换成 html，这里不需要再转换，组件还要继续完成 html 的后续处理。
+ * @param html
+ * @param blog
+ * @returns
+ */
+function build(html: string, blog = false): Component {
   return defineComponent({
     template: blog
       ? `<BlogLayout><div ref="content" v-html="html"></div></BlogLayout>`
@@ -39,7 +37,7 @@ function build(raw: string, blog = false): Component {
       // 代码
       content.querySelectorAll('pre').forEach(pre => {
         pre.classList.add('bg-light', 'p-3', 'lh-base')
-        const wrapper = document.createElement('position-relative')
+        const wrapper = document.createElement('div')
         wrapper.classList.add('position-relative')
         const copyBtn = document.createElement('i')
         copyBtn.className = 'fas fa-copy position-absolute'
