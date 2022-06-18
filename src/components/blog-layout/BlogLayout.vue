@@ -50,7 +50,7 @@
       </div>
       <div class="row g-3">
         <div class="col-lg-7 col-md-8 offset-lg-3 offset-md-4">
-          <div id="gitalk-container"></div>
+          <!-- 预留评论区 -->
         </div>
       </div>
     </div>
@@ -60,8 +60,6 @@
 import Layout from '../Layout.vue'
 import Directories from '@/components/blog-layout/Directories.vue'
 import TipList from '@/components/blog-layout/TipList.vue'
-import 'gitalk/dist/gitalk.css'
-import Gitalk from 'gitalk'
 import { getCurrentPage, Page } from '@/config'
 import { detectDirectories, Directory } from '@/components/blog-layout/directory'
 import { onBeforeMount, onMounted, reactive, ref } from 'vue'
@@ -88,18 +86,6 @@ onMounted(() => {
     data.directories = detectDirectories(articleEl)
   })
   observer.observe(articleEl, { childList: true })
-
-  // gitalk
-  const gitalk = new Gitalk({
-    clientID: '871627f5ca5ce1607860',
-    clientSecret: 'ca7b42b2794ef51c27148fcdcc1ed8191f3d4470',
-    repo: 'peaktai.github.io',
-    owner: 'PeakTai',
-    admin: ['PeakTai'],
-    id: location.pathname, // Ensure uniqueness and length less than 50
-    distractionFreeMode: false // Facebook-like distraction free mode
-  })
-  gitalk.render('gitalk-container')
 })
 
 onBeforeMount(() => {
