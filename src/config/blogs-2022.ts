@@ -10,7 +10,7 @@ export const blog2022Pages: Page[] = [
       'TreeMap 优化，JMX 配置增强，windows 版本免去环境变量配置，废弃偏向锁，弱算法警告，' +
       'krb5.conf 支持 canonicalize，增加新的系统属性用于配置 TLS 签名模式 ',
     tags: ['java', '隐藏类'],
-    rootComponentPath: '@/pages/blogs/2022/Java15Features.vue',
+    rootComponentPath: '@/pages/blogs/2022/java-15-features.md',
     createAt: new Date('2022/05/18')
   },
   {
@@ -22,7 +22,7 @@ export const blog2022Pages: Page[] = [
       '删除部分废弃的线程方法，ZGC 支持 Windows 和 Mac os，G1 支持 NUMA-Aware 内存分配，' +
       'Parallel GC 优化，JFR 支持事件消费可用于记录进程外的记录',
     tags: ['java', 'record', 'gc', '线程'],
-    rootComponentPath: '@/pages/blogs/2022/Java14Features.vue',
+    rootComponentPath: '@/pages/blogs/2022/java-14-features.md',
     createAt: new Date('2022/04/15')
   },
   {
@@ -46,7 +46,7 @@ export const blog2022Pages: Page[] = [
       '各个平台都推出了自己的小程序。那么，如果要做一个新项目，我们是否应该考虑开发小程序呢？' +
       '或者，已有的项目有没有必要改造成小程序？',
     tags: ['微信', '小程序', 'html5', '跨平台开发', 'pwa'],
-    rootComponentPath: '@/pages/blogs/2022/MyViewsOnMiniProgram.vue',
+    rootComponentPath: '@/pages/blogs/2022/my-views-on-mini-program.md',
     createAt: new Date('2022/01/03')
   },
   {
@@ -92,7 +92,7 @@ export const blog2022Pages: Page[] = [
     category: 'blog',
     tags: ['微信', '数据库'],
     desc: '今天聊一下类似微信朋友圈这样的业务该怎么设计数据库的表结构，纯个人观点，希望能够提供一点参考价值',
-    rootComponentPath: '@/pages/blogs/2022/WechatMomentsDbd.vue',
+    rootComponentPath: '@/pages/blogs/2022/wechat-moments-dbd.md',
     createAt: new Date('2022/02/13')
   },
   {
