@@ -140,7 +140,7 @@ function updateList() {
   if (data.list === props.modelValue) {
     return
   }
-  data.list = deepClone(props.modelValue || [])
+  data.list = props.modelValue || []
   inspectList()
 }
 

@@ -131,7 +131,7 @@ function updateHeaders() {
   if (props.modelValue === data.headers) {
     return
   }
-  data.headers = deepClone(props.modelValue)
+  data.headers = props.modelValue
   inspectHeaders()
 }
 
