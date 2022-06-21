@@ -8,7 +8,6 @@ module.exports = {
   parallel: true,
   lintOnSave: true,
   outputDir: './docs',
-  runtimeCompiler: true,
   pages,
   configureWebpack: {
     plugins: [
