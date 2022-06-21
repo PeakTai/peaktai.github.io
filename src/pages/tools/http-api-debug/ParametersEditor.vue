@@ -28,7 +28,7 @@
             type="text"
             class="form-control"
             placeholder="参数名称"
-            minlength="2"
+            minlength="1"
             maxlength="128"
             v-model="param.name"
             list="parameter-name-list"
@@ -71,7 +71,6 @@
 </template>
 <script setup lang="ts">
 import { showWarning } from '@/utils/message'
-import { deepClone } from '@/utils/object'
 import { PropType, reactive, watch, defineProps, defineEmits, onBeforeUnmount } from 'vue'
 import { Parameter } from './commons'
 import { listHistory, onHistoryChange, History, offHistoryChange } from './history'
@@ -136,11 +135,37 @@ watch(
   { deep: true }
 )
 
-function updateList() {
-  if (data.list === props.modelValue) {
-    return
+function isParametersEquals(parameters1: Parameter[], parameters2: Parameter[]): boolean {
+  const filteredHeaders1 = parameters1.filter(p => !!p.name)
+  const filteredHeaders2 = parameters2.filter(p => !!p.name)
+  if (filteredHeaders1.length !== filteredHeaders2.length) {
+    return false
   }
-  data.list = props.modelValue || []
+  for (let i = 0; i < filteredHeaders1.length; i++) {
+    const param1 = filteredHeaders1[i]
+    const param2 = filteredHeaders2[i]
+    if (
+      param1.name !== param2.name ||
+      param1.type !== param2.type ||
+      param1.enabled !== param2.enabled
+    ) {
+      return false
+    }
+    if (param1.type === 'text') {
+      if (param1.text !== param2.text) {
+        return false
+      }
+    }
+  }
+  return true
+}
+
+function updateList() {
+  if (props.modelValue && props.modelValue.length) {
+    if (isParametersEquals(props.modelValue, data.list)) {
+      data.list = props.modelValue || []
+    }
+  }
   inspectList()
 }
 

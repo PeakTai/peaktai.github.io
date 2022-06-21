@@ -42,7 +42,6 @@
 
 <script setup lang="ts">
 import { showWarning } from '@/utils/message'
-import { deepClone } from '@/utils/object'
 import { computed, PropType, reactive, watch, defineProps, defineEmits, onBeforeUnmount } from 'vue'
 import { Header } from './commons'
 import { listHistory, onHistoryChange, History, offHistoryChange } from './history'
@@ -79,7 +78,7 @@ const errMsg = computed<string>(() => {
       .filter((value, idx) => idx > index)
       .findIndex(value => value.name === name)
     if (homonymicIdx !== -1) {
-      return `存在多个名为 ${name} 的 Header`
+      return `存在多个名为 ${name ? name : '空'} 的 Header`
     }
   }
   return ''
@@ -127,11 +126,30 @@ watch(
   { deep: true }
 )
 
-function updateHeaders() {
-  if (props.modelValue === data.headers) {
-    return
+function isHeadersEquals(headers1: Header[], headers2: Header[]): boolean {
+  const filteredHeaders1 = headers1.filter(header => !!header.name)
+  const filteredHeaders2 = headers2.filter(header => !!header.name)
+  if (filteredHeaders1.length !== filteredHeaders2.length) {
+    return false
   }
-  data.headers = props.modelValue
+  for (const header of filteredHeaders1) {
+    const homonymic = filteredHeaders2.find(h => h.name === header.name)
+    if (!homonymic) {
+      return false
+    }
+    if (homonymic.value !== header.value) {
+      return false
+    }
+  }
+  return true
+}
+
+function updateHeaders() {
+  if (props.modelValue && props.modelValue.length) {
+    if (!isHeadersEquals(props.modelValue, data.headers)) {
+      data.headers = props.modelValue
+    }
+  }
   inspectHeaders()
 }
 

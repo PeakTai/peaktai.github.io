@@ -64,7 +64,7 @@
         </div>
         <div class="col-md-4">
           <label class="form-label">referrer 策略</label>
-          <select name="" id="" class="form-select" v-model="data.referrerPolicy">
+          <select class="form-select" v-model="data.referrerPolicy">
             <option v-for="pol in data.referrerPolicys" :key="pol" :value="pol">
               {{ pol || '默认' }}
             </option>
