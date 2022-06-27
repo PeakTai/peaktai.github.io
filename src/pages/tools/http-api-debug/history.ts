@@ -1,5 +1,5 @@
-import { openDbStore } from '@/utils/indexed-db'
 import { deepClone } from '@/utils/object'
+import { DbStore, getOrCreateDbStore } from '@/utils/indexed-db'
 import { Entity } from './../../../utils/indexed-db'
 import { Method, RequestContentType, Header, Parameter } from './commons'
 
@@ -15,7 +15,9 @@ export interface History {
   parameters: Parameter[]
 }
 
-const storePromise = openDbStore<History>('http-api-debug-history')
+function getStore(): Promise<DbStore<History>> {
+  return getOrCreateDbStore<History>('http-api-debug-history')
+}
 
 /**
  * 这里将历史记录缓存，并保持与 indexedDB 同步，通过事件可同步实时信息，多个组件共享.
@@ -30,14 +32,14 @@ export async function listHistory(): Promise<Array<History & Entity>> {
   if (_list) {
     return _list
   }
-  const store = await storePromise
+  const store = await getStore()
   _list = await store.findAll()
   return _list
 }
 
 export async function addHistory(history: History): Promise<void> {
   const list = await listHistory()
-  const store = await storePromise
+  const store = await getStore()
   // 最多只存 1000 条
   const count = list.length
   // 从前面删除多余的
@@ -69,13 +71,13 @@ export async function removeHistory(id: number): Promise<void> {
     return
   }
   list.splice(idx, 1)
-  const store = await storePromise
+  const store = await getStore()
   await store.deleteById(id)
   triggerChangeEvent()
 }
 
 export async function clearHistory(): Promise<void> {
-  const store = await storePromise
+  const store = await getStore()
   _list = []
   await store.clear()
   triggerChangeEvent()
