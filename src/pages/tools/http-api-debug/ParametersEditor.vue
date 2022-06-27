@@ -136,14 +136,14 @@ watch(
 )
 
 function isParametersEquals(parameters1: Parameter[], parameters2: Parameter[]): boolean {
-  const filteredHeaders1 = parameters1.filter(p => !!p.name)
-  const filteredHeaders2 = parameters2.filter(p => !!p.name)
-  if (filteredHeaders1.length !== filteredHeaders2.length) {
+  const filteredParameters1 = parameters1.filter(p => !!p.name)
+  const filteredParameters2 = parameters2.filter(p => !!p.name)
+  if (filteredParameters1.length !== filteredParameters2.length) {
     return false
   }
-  for (let i = 0; i < filteredHeaders1.length; i++) {
-    const param1 = filteredHeaders1[i]
-    const param2 = filteredHeaders2[i]
+  for (let i = 0; i < filteredParameters1.length; i++) {
+    const param1 = filteredParameters1[i]
+    const param2 = filteredParameters2[i]
     if (
       param1.name !== param2.name ||
       param1.type !== param2.type ||
@@ -162,7 +162,7 @@ function isParametersEquals(parameters1: Parameter[], parameters2: Parameter[]):
 
 function updateList() {
   if (props.modelValue && props.modelValue.length) {
-    if (isParametersEquals(props.modelValue, data.list)) {
+    if (!isParametersEquals(props.modelValue, data.list)) {
       data.list = props.modelValue || []
     }
   }
