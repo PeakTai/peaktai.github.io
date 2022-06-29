@@ -7,16 +7,16 @@ export function generateEntryTs(page: Page): string {
     if (page.category === 'blog') {
       return `
       import { createApp } from 'vue'
-      import raw from '${page.rootComponentPath}'
-      import { buildMarkdownBlogComponent } from '@/components/markdown'
-      createApp(buildMarkdownBlogComponent(raw)).mount('#app')`
+      import html from '${page.rootComponentPath}'
+      import MarkdownPage from '@/components/MarkdownPage.vue'
+      createApp(MarkdownPage,{layout:'blog',html}).mount('#app')`
     } else {
       // 非 blog
       return `
       import { createApp } from 'vue'
-      import raw from '${page.rootComponentPath}'
-      import { buildMarkdownComponent } from '@/components/markdown'
-      createApp(buildMarkdownComponent(raw)).mount('#app')`
+      import html from '${page.rootComponentPath}'
+      import MarkdownPage from '@/components/MarkdownPage.vue'
+      createApp(MarkdownPage,{layout:'general',html}).mount('#app')`
     }
   }
   // vue 文件
