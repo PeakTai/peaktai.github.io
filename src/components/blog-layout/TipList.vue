@@ -1,6 +1,9 @@
 <template>
   <div>
-    <h4 class="pb-2 border-bottom mb-3">相关文章</h4>
+    <h4 class="pb-2 border-bottom mb-3">
+      <IconBlog></IconBlog>
+      &nbsp;相关文章
+    </h4>
     <p v-for="p in list" :key="p.id">
       <a :href="`/${p.id}.html`" class="text-decoration-none text-secondary">{{ p.title }}</a>
     </p>
@@ -10,8 +13,12 @@
 <script lang="ts">
 import { defineComponent, PropType } from 'vue'
 import { Page, pages } from '@/config'
+import IconBlog from '../icons/IconBlog.vue'
 
 export default defineComponent({
+  components: {
+    IconBlog
+  },
   props: {
     page: {
       required: true,
