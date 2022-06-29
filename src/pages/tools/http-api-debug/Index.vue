@@ -233,40 +233,16 @@ import { addHistory, History } from './history'
 
 const headerArea = ref<HTMLElement>()
 
-const data = reactive<{
-  url: string
-  method: Method
-  timeout: number // 超时时间，单位毫秒
-  headers: Header[]
-  contentType: RequestContentType
-  textContent: string
-  jsonContent: string
-  parameters: Parameter[]
-  referrerPolicy: ReferrerPolicy
-  referrerPolicys: string[]
-  methods: string[]
-  contentTypes: string[]
-  resp: {
-    headers?: string
-    text?: string
-    json?: any
-    fileUrl?: string
-  }
-  respSetting: {
-    headersVisible: boolean
-    bodyVisible: boolean
-    autoWrap: boolean
-  }
-}>({
+const data = reactive({
   url: '',
-  headers: [],
+  headers: [] as Header[],
   timeout: 5000,
   method: Method.GET,
   contentType: RequestContentType.URLENCODE,
   textContent: '',
   jsonContent: '',
-  parameters: [],
-  referrerPolicy: '',
+  parameters: [] as Parameter[],
+  referrerPolicy: '' as ReferrerPolicy,
   referrerPolicys: [
     '',
     'no-referrer',
@@ -281,11 +257,11 @@ const data = reactive<{
   // ts 的枚举，仅当 value 不是数字时，才可以这样遍历，需小心使用，默认不赋值的情况下 value 是数字
   methods: Object.values(Method),
   contentTypes: Object.values(RequestContentType),
-  resp: {},
+  resp: {} as { headers?: string; text?: string; json?: any; fileUrl?: string },
   respSetting: {
     headersVisible: true,
     bodyVisible: true,
-    autoWrap: true
+    autoWrap: false
   }
 })
 
@@ -326,11 +302,14 @@ function startRequest() {
         }
       } else {
         if (data.contentType === RequestContentType.URLENCODE) {
+          headers['Content-Type'] = RequestContentType.URLENCODE
           options.body = queryString
         }
         if (data.contentType == RequestContentType.TEXT) {
+          headers['Content-Type'] = `${RequestContentType.TEXT}; charset=utf-8`
           options.body = data.textContent
         } else if (data.contentType === RequestContentType.JSON) {
+          headers['Content-Type'] = `${RequestContentType.JSON}; charset=utf-8`
           options.body = data.jsonContent
         } else {
           const formData = new FormData()
