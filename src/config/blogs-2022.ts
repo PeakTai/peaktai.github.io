@@ -151,14 +151,23 @@ export const blog2022Pages: Page[] = [
     createAt: new Date('2022/03/29')
   },
   {
-    id: 'blogs/2022/css-background-positon-ppercentage',
+    id: 'blogs/2022/css-background-positon-percentage',
     title: '记一次 css background-position 遇到的坑',
     category: 'blog',
     tags: ['css', '前端'],
     desc:
       'background-position ， 一看名字就是设置背景位置的，第一反应就是和 position 差不多，然而设置了 left 和 top 却没有和我预想的一样，' +
       '总是调不到想要的位置，查了很多资料才搞明白',
-    rootComponentPath: '@/pages/blogs/2022/css-background-positon-ppercentage.md',
+    rootComponentPath: '@/pages/blogs/2022/css-background-positon-percentage.md',
     createAt: new Date('2022/02/16')
+  },
+  {
+    id: 'blogs/2022/some-thoughts-on-learning-english',
+    title: '最近学习英语的一些感想',
+    category: 'blog',
+    tags: ['英语'],
+    desc: '突然打算认认真真学习英语口语，开始从互联网上找资料，尝试各种方法，观看各类英语教学视频，分享在学习过程中对于各种不同形式的学习资源的一些观点看法',
+    rootComponentPath: '@/pages/blogs/2022/some-thoughts-on-learning-english.md',
+    createAt: new Date('2022/07/05')
   }
 ]
