@@ -169,5 +169,14 @@ export const blog2022Pages: Page[] = [
     desc: '突然打算认认真真学习英语口语，开始从互联网上找资料，尝试各种方法，观看各类英语教学视频，分享在学习过程中对于各种不同形式的学习资源的一些观点看法',
     rootComponentPath: '@/pages/blogs/2022/some-thoughts-on-learning-english.md',
     createAt: new Date('2022/07/05')
+  },
+  {
+    id: 'blogs/2022/concise-tutorial-of-pwa',
+    title: '极简 PWA 上手教程',
+    category: 'blog',
+    tags: ['前端', 'pwa'],
+    desc: '非常简洁的 pwa 教程，只有必要的代码，附加一些相关的踩坑经验',
+    rootComponentPath: '@/pages/blogs/2022/concise-tutorial-of-pwa.md',
+    createAt: new Date('2022/07/07')
   }
 ]
