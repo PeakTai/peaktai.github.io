@@ -3,7 +3,7 @@
     <!--左右右结构: 左侧是文章的目录,中间是文章内容,右侧是相关的文章推荐-->
     <div class="container-xxl mt-5">
       <div class="row g-3">
-        <div class="col-lg-3 col-md-4">
+        <div class="col-lg-2 col-md-3">
           <a
             v-if="data.directories.length"
             class="btn btn-outline-secondary d-block d-md-none mb-4"
@@ -18,7 +18,7 @@
             <directories :directories="data.directories"></directories>
           </div>
         </div>
-        <div class="col-lg-7 col-md-8">
+        <div class="col-lg-8 col-md-9">
           <h1 class="pb-2">{{ data.page.title }}</h1>
           <p class="text-secondary border-bottom pb-2">
             <small>
@@ -45,7 +45,7 @@
             </p>
           </article>
         </div>
-        <div class="col-lg-2 col-md-8 offset-md-4 offset-lg-0">
+        <div class="col-lg-2 col-md-8 offset-md-3 offset-lg-0">
           <tip-list :page="data.page" class="sticky-lg-top"></tip-list>
         </div>
       </div>

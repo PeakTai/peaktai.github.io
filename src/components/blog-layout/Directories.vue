@@ -4,20 +4,20 @@
       <p
         :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === undefined }"
         @click="scrollToDirectory(directory)"
-        class="text-truncate"
+        class="text-truncate mb-1"
         :title="directory.name"
       >
-        {{ directory.name }}
+        <small>{{ directory.name }}</small>
       </p>
       <p
         v-for="(subDirectory, subIdx) in directory.subdirectories"
         :key="subDirectory.name"
         :class="{ 'text-primary': activeIndices[0] === idx && activeIndices[1] === subIdx }"
-        class="ps-3 text-truncate"
+        class="ps-3 text-truncate mb-1"
         :title="directory.name"
         @click="scrollToDirectory(subDirectory)"
       >
-        {{ subDirectory.name }}
+        <small>{{ subDirectory.name }}</small>
       </p>
     </template>
   </div>

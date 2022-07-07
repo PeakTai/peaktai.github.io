@@ -1,13 +1,17 @@
 <template>
   <div>
-    <h4 class="pb-2 border-bottom mb-3">
+    <h5 class="pb-2 border-bottom mb-3">
       <IconBlog></IconBlog>
       &nbsp;相关文章
-    </h4>
-    <p v-for="p in list" :key="p.id">
-      <a :href="`/${p.id}.html`" class="text-decoration-none text-secondary">{{ p.title }}</a>
+    </h5>
+    <p v-for="p in list" :key="p.id" class="mb-1">
+      <a :href="`/${p.id}.html`" class="text-decoration-none text-secondary">
+        <small>{{ p.title }}</small>
+      </a>
     </p>
-    <p v-if="!list.length" class="text-secondary">未找到相关文章！</p>
+    <p v-if="!list.length" class="text-secondary">
+      <small>未找到相关文章！</small>
+    </p>
   </div>
 </template>
 <script lang="ts">
