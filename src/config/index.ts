@@ -47,7 +47,10 @@ export const pages: Page[] = [
     id: 'tools',
     title: '在线小工具',
     category: 'tool',
-    desc: '一些开发相关的在线小工具，步骤计算器等',
+    desc:
+      '主要是一些为自己做的开发工具用于辅助编程，还有其它一些工作和生活中会用到的小工具。 ' +
+      '也没有什么太多的新东西，很多功能装几个软件就有了，' +
+      '之所以自己又做了一套，是想用的趁手些， 精简掉不需要的功能，更符合自己的需求和习惯。',
     tags: ['在线工具'],
     rootComponentPath: '@/pages/tools/Index.vue',
     notSearchable: true
