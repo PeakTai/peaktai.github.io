@@ -178,5 +178,14 @@ export const blog2022Pages: Page[] = [
     desc: '非常简洁的 pwa 教程，只有必要的代码，附加一些相关的踩坑经验',
     rootComponentPath: '@/pages/blogs/2022/concise-tutorial-of-pwa.md',
     createAt: new Date('2022/07/07')
+  },
+  {
+    id: 'blogs/2022/java-16-features',
+    title: 'Java 16 的主要特性',
+    category: 'blog',
+    tags: ['java', 'zgc', 'jpackage'],
+    desc: '引入了一些孵化API，外部内存和向量API 等，对 JDK 内部 API 做了强封装，ZGC 并发处理增强，元数据内存占用减少，密封类预览版更新，record 支持方法和成员变量等申明，jpackage 正式发布',
+    rootComponentPath: '@/pages/blogs/2022/java-16-features.md',
+    createAt: new Date('2022/08/24')
   }
 ]
