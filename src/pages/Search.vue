@@ -10,7 +10,6 @@
             <option value="">所有页面</option>
             <option value="blog">博客</option>
             <option value="tool">小工具</option>
-            <option value="demo">代码演示</option>
           </select>
         </div>
         <div class="col-md-5">
