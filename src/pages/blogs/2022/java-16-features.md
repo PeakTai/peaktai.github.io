@@ -1,4 +1,4 @@
-Java 16 添加了许多 [孵化模块（ncubator module）](https://openjdk.org/jeps/11)，大多是第一个迭代版本，
+Java 16 添加了许多 [孵化模块（incubator module）](https://openjdk.org/jeps/11)，大多是第一个迭代版本，
 这些模块很多已经在后续的版本中被修改了，了解下就好，不要在生产环境中使用。
 
 ### 外部内存访问 API（Foreign-Memory Access API）
