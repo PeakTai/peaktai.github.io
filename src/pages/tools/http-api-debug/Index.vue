@@ -238,6 +238,7 @@ function startRequest() {
       // 构建 url 和 queryString
       let url = data.url
       let queryString = ''
+
       if (data.contentType === RequestContentType.URLENCODE && data.parameters.length) {
         queryString = data.parameters
           .filter(param => param.enabled && param.type === 'text' && param.name)
@@ -252,8 +253,7 @@ function startRequest() {
         if (data.contentType === RequestContentType.URLENCODE) {
           headers['Content-Type'] = RequestContentType.URLENCODE
           options.body = queryString
-        }
-        if (data.contentType == RequestContentType.TEXT) {
+        } else if (data.contentType == RequestContentType.TEXT) {
           headers['Content-Type'] = `${RequestContentType.TEXT}; charset=utf-8`
           options.body = data.textContent
         } else if (data.contentType === RequestContentType.JSON) {
