@@ -1,6 +1,6 @@
 {
   "name": "peaktak-site",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "description": "Peak tai's personal site",
   "main": "index.js",
   "keywords": [
@@ -19,9 +19,11 @@
   "dependencies": {
     "@types/bootstrap": "^5.1.11",
     "@types/marked": "^4.0.3",
+    "@types/string-similarity": "^4.0.0",
     "bignumber.js": "^9.0.1",
     "highlight.js": "^11.5.1",
     "marked": "^4.0.17",
+    "string-similarity": "^4.0.4",
     "vue": "^3.2.25"
   },
   "devDependencies": {

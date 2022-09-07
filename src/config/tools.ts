@@ -44,5 +44,12 @@ export const toolPages: Page[] = [
     支持收藏夹和历史记录，但是不提供任何后端存储服务，所有的数据仅存储在本地（localStorage），数据不能多设备间互通，如果想转移数据，可以将记录导出为文件，
       然后在别的设备上将文件导入`,
     rootComponentPath: '@/pages/tools/http-api-debug/Index.vue'
+  },
+  {
+    id: 'tools/reciting-words',
+    category: 'tool',
+    title: '背单词',
+    desc: '自己在学习英语过程中写的，用于背记常用词汇，做了相似词功能，以便于能更好的区分容易混淆的单词',
+    rootComponentPath: '@/pages/tools/reciting-words/Index.vue'
   }
 ]

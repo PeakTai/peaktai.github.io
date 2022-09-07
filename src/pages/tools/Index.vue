@@ -70,6 +70,18 @@
             </p>
           </a>
         </div>
+        <div class="col">
+          <a href="/tools/reciting-words.html" class="text-decoration-none text-dark">
+            <div class="ratio ratio-1x1 mb-1">
+              <div class="rounded border d-flex justify-content-center align-items-center fs-1">
+                <IconWord></IconWord>
+              </div>
+            </div>
+            <p class="text-center text-secondary text-truncate">
+              <small>背单词</small>
+            </p>
+          </a>
+        </div>
       </div>
     </div>
   </layout>
@@ -83,6 +95,7 @@ import IconFileCode from '@/components/icons/IconFileCode.vue'
 import IconBrowser from '@/components/icons/IconBrowser.vue'
 import IconDropper from '@/components/icons/IconDropper.vue'
 import IconBug from '@/components/icons/IconBug.vue'
+import IconWord from '../../components/icons/IconWord.vue'
 </script>
 
 <style scoped>
