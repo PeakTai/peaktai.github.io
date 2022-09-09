@@ -12,7 +12,7 @@ export const pages: Page[] = [
     id: 'index',
     category: 'blog',
     title: '首页',
-    desc: '',
+    desc: 'peak 的个人网站步入循环，里面有个人的博客文章，一些在线工具，以及写过的部分代码',
     tags: ['blogs', '博客', 'peaktai', '个人网站', 'personal'],
     rootComponentPath: '@/pages/Index.vue',
     notSearchable: true
@@ -29,8 +29,8 @@ export const pages: Page[] = [
     id: 'about',
     title: '关于本站',
     category: 'about',
-    desc: '关于 peak 的个人网站”有限循环“',
-    tags: ['blogs', '博客', 'peaktai', '个人网站', 'personal-site', '有限循环'],
+    desc: '关于 peak 的个人网站步入循环',
+    tags: ['blogs', '博客', 'peaktai', '个人网站', 'personal-site', '步入循环'],
     rootComponentPath: '@/pages/About.vue',
     notSearchable: true
   },
@@ -38,7 +38,7 @@ export const pages: Page[] = [
     id: 'search',
     title: '搜索',
     category: 'search',
-    desc: `搜索 peak 的个人网站“步入循环”内的所有页面`,
+    desc: `搜索 peak 的个人网站步入循环内的所有页面`,
     tags: ['blogs', '博客', 'peaktai', '个人网站', 'personal'],
     rootComponentPath: '@/pages/Search.vue',
     notSearchable: true
