@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Canvas player demo</title>
+  <meta name="description" content="html5 基于 canvas 的视频播放器实现演示">
+  <meta name="keywords" content="canvas,video,player,html5">
+  </style>
+</head>
+
+<body>
+  <canvas height="240" width="320" id="player" onclick="playOrPause()"></canvas>
+  <p>
+    <button type="button" onclick="reset()">重置</button>
+    <button type="button" onclick="fullscreen()">全屏</button>
+  </p>
+  <script src="cipher.js"></script>
+  <script>
+    const canvas = document.getElementById('player')
+    /** @type {CanvasRenderingContext2D} */
+    const ctx = canvas.getContext("2d")
+
+    const video = document.createElement('video')
+    video.addEventListener('canplay', e => {
+      // 渲染封面
+      this.renderCover()
+    })
+    fetch('./encrypt.bin').then(async (resp) => {
+      const blob = await resp.blob()
+      const buf = await blob.arrayBuffer()
+      const file = new Blob([decrypt(buf)], { type: 'video/mp4' })
+      video.src = URL.createObjectURL(file)
+    }).catch(console.error)
+
+
+    function playOrPause() {
+      if (video.ended) {
+        return
+      }
+      if (video.paused) {
+        video.play()
+        startRender()
+      } else {
+        video.pause()
+      }
+    }
+
+    function startRender() {
+      requestAnimationFrame(() => {
+        renderVideo()
+        if (!video.paused && !video.ended) {
+          startRender()
+        }
+      })
+    }
+
+    function renderCover() {
+      ctx.clearRect(0, 0, 320, 240)
+      ctx.fillStyle = '#000000'
+      ctx.fillRect(0, 0, 320, 240)
+      ctx.font = '40px Arial'
+      ctx.fillStyle = '#ffffff'
+      const text = '点击播放'
+      const m = ctx.measureText(text)
+      ctx.fillText(text, 320 / 2 - m.width / 2, 240 / 2 + 40 / 2)
+    }
+
+    function renderVideo() {
+      ctx.clearRect(0, 0, 320, 240)
+      ctx.drawImage(video, 0, 0, 320, 240)
+      if (video.paused) {
+        ctx.font = '40px Arial'
+        ctx.fillStyle = '#ffffff'
+        const text = '已暂停'
+        const m = ctx.measureText(text)
+        ctx.fillText(text, 320 / 2 - m.width / 2, 240 / 2 + 40 / 2)
+      }
+    }
+
+    function reset() {
+      video.currentTime = 0
+      video.pause()
+    }
+
+    function fullscreen() {
+      canvas.requestFullscreen()
+    }
+
+  </script>
+</body>
+
+</html>

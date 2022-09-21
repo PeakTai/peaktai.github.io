@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Media Source Extensions Demo</title>
+</head>
+
+<body>
+  <video playsinline autoplay="false" controls controlslist="nodownload" id="video" height="240" width="320"></video>
+  <script src="cipher.js"></script>
+  <script>
+    // Promise.resolve().then(async () => {
+    // 测试代码：用于生成加密文件
+    //   const resp = await fetch('./test.mp4')
+    //   const file = await resp.blob()
+    //   const arrayBuffer = await file.arrayBuffer()
+    //   console.log('array buffer', arrayBuffer)
+    //   const crypt = encrypt(arrayBuffer)
+    //   console.log('crypt', crypt);
+    //   const newBlob = new Blob([crypt])
+    //   const a = document.createElement('a')
+    //   a.href = URL.createObjectURL(newBlob)
+    //   a.download = 'file.bin'
+    //   a.click()
+
+    // }).catch(err => {
+    //   alert('出错了，控制台查看详情信息')
+    //   console.error(err)
+    // })
+
+    const video = document.getElementById('video')
+    video.addEventListener('error', e => {
+      console.log('video error', e)
+      console.log('video error', e.message)
+    })
+    video.addEventListener('loadeddata', e => {
+      console.log('video loadeddata', e)
+    })
+
+    const mimeCodec = 'video/mp4; codecs="avc1.640015,mp4a.40.2"'
+
+    if (!('MediaSource' in window && MediaSource.isTypeSupported(mimeCodec))) {
+      throw new Error('Unsupported MIME type or codec:' + mimeCodec)
+    }
+
+    const mediaSource = new MediaSource;
+    video.src = URL.createObjectURL(mediaSource);
+    mediaSource.addEventListener('sourceopen', (e) => {
+      fetch('./encrypt.bin').then(async (resp) => {
+        const blob = await resp.blob()
+        const buf = await blob.arrayBuffer()
+        const sourceBuffer = mediaSource.addSourceBuffer(mimeCodec);
+        sourceBuffer.addEventListener('updateend', () => {
+          if (mediaSource.readyState !== "open") {
+            return
+          }
+          mediaSource.endOfStream();
+          console.log(mediaSource.readyState); // ended
+        });
+        sourceBuffer.addEventListener('error', (e) => {
+          alert('解码失败')
+          console.log('source buffer error', e)
+        })
+        sourceBuffer.addEventListener('abort', (e) => {
+          console.log('source buffer abort', e)
+        })
+        sourceBuffer.appendBuffer(decrypt(buf));
+        console.log('appendBuffer after')
+      }).catch(console.error)
+    })
+  </script>
+</body>
+
+</html>

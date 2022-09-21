@@ -187,5 +187,16 @@ export const blog2022Pages: Page[] = [
     desc: '引入了一些孵化API，外部内存和向量API 等，对 JDK 内部 API 做了强封装，ZGC 并发处理增强，元数据内存占用减少，密封类预览版更新，record 支持方法和成员变量等申明，jpackage 正式发布',
     rootComponentPath: '@/pages/blogs/2022/java-16-features.md',
     createAt: new Date('2022/08/24')
+  },
+  {
+    id: 'blogs/2022/html5-video-player-prevent-download',
+    title: 'html5 视频播放防下载的几种方案',
+    category: 'blog',
+    tags: ['前端', '视频播放器', 'MSE', 'canvas'],
+    desc:
+      '整理了几种 html5 视频播放器防下载的实现，直接设置 controlslist 让原生播放器不出现下载选项，' +
+      '通过 Media Source Extensions (MSE) 加密传输和通过 canvas 实现播放器界面让浏览器不能识别出视频播放器',
+    rootComponentPath: '@/pages/blogs/2022/html5-video-player-prevent-download.md',
+    createAt: new Date('2022/09/21')
   }
 ]
