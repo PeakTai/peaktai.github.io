@@ -1,4 +1,4 @@
-export type PageCategory = 'blog' | 'tool' | 'demo' | 'search' | 'about'
+export type PageCategory = 'blog' | 'tool' | 'code' | 'search' | 'about'
 
 /**
  * 页面信息.

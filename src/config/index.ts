@@ -55,15 +55,6 @@ export const pages: Page[] = [
     rootComponentPath: '@/pages/tools/Index.vue',
     notSearchable: true
   },
-  {
-    id: 'demos',
-    title: '在线演示',
-    category: 'demo',
-    desc: '前端在线演示',
-    tags: ['在线演示'],
-    rootComponentPath: '@/pages/demos/Index.vue',
-    notSearchable: true
-  },
   ...blog2022Pages,
   ...toolPages
 ]
