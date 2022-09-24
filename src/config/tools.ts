@@ -32,6 +32,7 @@ export const toolPages: Page[] = [
   {
     id: 'tools/color-picker',
     category: 'tool',
+    tags: ['图片拾色器', '图片取色'],
     title: '图片拾色器',
     desc: '拾取图片中的颜色，显示 HTML（十六进制） 和 RGBA 两种格式的颜色值',
     rootComponentPath: '@/pages/tools/ColorPicker.vue'
@@ -39,6 +40,7 @@ export const toolPages: Page[] = [
   {
     id: 'tools/http-api-debug',
     category: 'tool',
+    tags: ['在线接口调试', 'http接口调试'],
     title: 'HTTP API 调试',
     desc: ` 一个简易的后端接口调试工具，需要后端做好 CORS 设置，基于FETCH API实现，
     支持收藏夹和历史记录，但是不提供任何后端存储服务，所有的数据仅存储在本地（localStorage），数据不能多设备间互通，如果想转移数据，可以将记录导出为文件，
@@ -51,5 +53,13 @@ export const toolPages: Page[] = [
     title: '背单词',
     desc: '自己在学习英语过程中写的，用于背记常用词汇，做了相似词功能，以便于能更好的区分容易混淆的单词',
     rootComponentPath: '@/pages/tools/reciting-words/Index.vue'
+  },
+  {
+    id: 'tools/image-compression',
+    category: 'tool',
+    tags: ['图片压缩', '批量图片压缩', 'jpg压缩', 'png压缩'],
+    title: '图片批量压缩',
+    desc: '基于 canvas 实现的前端图片批量压缩，主要用于写程序偶尔需要批量处理 icon 或插图的场景，对 png 格式的压缩效果不太好',
+    rootComponentPath: '@/pages/tools/ImageCompression.vue'
   }
 ]
