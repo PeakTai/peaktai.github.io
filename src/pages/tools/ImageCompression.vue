@@ -255,7 +255,7 @@ function downloadAll() {
     data.list
       .filter(item => item.compressedFile)
       .forEach(item => {
-        zip.file(item.fileName, item.compressedFile as Blob)
+        zip.file(buildFileName(item.fileName), item.compressedFile as Blob)
       })
     zip.generateAsync({ type: 'blob' }).then(content => {
       // see FileSaver.js
@@ -271,6 +271,13 @@ function downloadAll() {
     showWarning('打包失败')
   })
 }
+function buildFileName(originalFileName: string): string {
+  const idx = originalFileName.lastIndexOf('.')
+  if (idx !== -1) {
+    return `${originalFileName.substring(0, idx)}.${data.format}`
+  }
+  return `${originalFileName}.${data.format}`
+}
 function download(item: Item) {
   if (!item.compressedFile) {
     return
@@ -278,7 +285,7 @@ function download(item: Item) {
   const a = document.createElement('a')
   a.href = URL.createObjectURL(item.compressedFile)
   a.target = '_blank'
-  a.download = item.fileName
+  a.download = buildFileName(item.fileName)
   a.click()
 }
 
