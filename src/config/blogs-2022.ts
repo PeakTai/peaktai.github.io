@@ -198,5 +198,16 @@ export const blog2022Pages: Page[] = [
       '通过 Media Source Extensions (MSE) 加密传输和通过 canvas 实现播放器界面让浏览器不能识别出视频播放器',
     rootComponentPath: '@/pages/blogs/2022/html5-video-player-prevent-download.md',
     createAt: new Date('2022/09/21')
+  },
+  {
+    id: 'blogs/2022/java-development-comparison-between-vscode-and-idea',
+    title: 'vscode 与 IntelliJ IDEA 在开发 Java 方面的体验对比',
+    category: 'blog',
+    tags: ['java', 'spring', 'idea', 'vscode', 'intellij'],
+    desc:
+      'vscode 和 idea 我都在用，也尝试过使用 vscode 做 Java 开发一段时间，这篇文章分享下我的使用体检，' +
+      '从代码补全、引用查看、代码调试、以及对 Java 的主流框架 Spring 的支持等各方面做一下对比。',
+    rootComponentPath: '@/pages/blogs/2022/java-development-comparison-between-vscode-and-idea.md',
+    createAt: new Date('2022/10/01')
   }
 ]
