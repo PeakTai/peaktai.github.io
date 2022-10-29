@@ -209,5 +209,16 @@ export const blog2022Pages: Page[] = [
       '从代码补全、引用查看、代码调试、以及对 Java 的主流框架 Spring 的支持等各方面做一下对比。',
     rootComponentPath: '@/pages/blogs/2022/java-development-comparison-between-vscode-and-idea.md',
     createAt: new Date('2022/10/01')
+  },
+  {
+    id: 'blogs/2022/gpd-win-max2-review',
+    title: 'GPD WIN Max2 一个多月的使用感受',
+    category: 'blog',
+    tags: ['掌机', '评测', 'GPD'],
+    desc:
+      'GPD WIN Max2 到手有一段时间了，本来想等等，看看首发用户的情况再说的，' +
+      '还是没忍住预约买了首发。买来主要办公用，偶尔玩玩游戏，中间办公也遇到了不少问题，游戏也做过很多测试，还发过一些视频。',
+    rootComponentPath: '@/pages/blogs/2022/gpd-win-max2-review.md',
+    createAt: new Date('2022/10/29')
   }
 ]
