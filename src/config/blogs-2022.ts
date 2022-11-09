@@ -220,5 +220,14 @@ export const blog2022Pages: Page[] = [
       '还是没忍住预约买了首发。买来主要办公用，偶尔玩玩游戏，中间办公也遇到了不少问题，游戏也做过很多测试，还发过一些视频。',
     rootComponentPath: '@/pages/blogs/2022/gpd-win-max2-review.md',
     createAt: new Date('2022/10/29')
+  },
+  {
+    id: 'blogs/2022/java-17-features',
+    title: 'java17 的主要特性',
+    desc: 'java 17 没有太多的新功能更新，主要是优化和增强，支持 m1 mac，javadoc优化，SunPKCS11 和伪随机数增强等',
+    category: 'blog',
+    tags: ['java', 'SunPKCS11', 'javadoc'],
+    rootComponentPath: '@/pages/blogs/2022/java-17-features.md',
+    createAt: new Date('2022/11/09')
   }
 ]
