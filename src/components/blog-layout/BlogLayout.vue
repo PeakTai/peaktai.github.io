@@ -102,6 +102,10 @@ article h4 {
   line-height: 2 !important;
 }
 
+article img {
+  max-width: 100% !important;
+}
+
 blockquote {
   color: rgb(108, 117, 125);
   padding-left: 1rem !important;
