@@ -229,5 +229,14 @@ export const blog2022Pages: Page[] = [
     tags: ['java', 'SunPKCS11', 'javadoc'],
     rootComponentPath: '@/pages/blogs/2022/java-17-features.md',
     createAt: new Date('2022/11/09')
+  },
+  {
+    id: 'blogs/2022/insta-360-x3-review',
+    title: 'insta360 x3 一个月的使用体验分享',
+    desc: 'insta360 x3 使用有一段时间,分享下自己深度使用后的体会心得,视频拍摄,后期剪辑,画质问题等',
+    category: 'blog',
+    tags: ['摄影', '全景相机', 'insta360', '3d视频'],
+    rootComponentPath: '@/pages/blogs/2022/insta-360-x3-review.md',
+    createAt: new Date('2022/12/03')
   }
 ]
