@@ -10,8 +10,8 @@
 ```js
 // 同步代码演示
 const result1 = step1()
-// step1 是同步的，step2 必须要等等 step1 执行完成才可以执行
-step2()"
+// step1 是同步的，step2 必须要等 step1 执行完成才可以执行
+step2()
 ```
 
 同步其实也意味着是**阻塞**的，上面的例子中 step1 执行的时候会阻塞当前线程，如果 step1 执行时间太长，step2 也只能等，必须要顺序执行，我们可以把这个等的过程就是阻塞。
@@ -22,7 +22,7 @@ step2()"
 // 异步代码演示，step1 不会立即返回结果，在 callback 中可以处理 step1 的结果
 step1Async(callback)
 // step1 调用后，step2 立刻执行，不需要等待 step1 执行完
-step2()"
+step2()
 ```
 
 关于同步和异步就说这么多，我觉得还是很好理解的，一般也不会在这里产生困惑。
@@ -47,7 +47,7 @@ System.out.println("文件读取完毕：" + bytes.length + " 字节");
 
 NIO 中大部分操作仍然是阻塞的，只有 SelectableChannel 支持多路复用，可以实现无阻塞。所以，NIO 大部分 API 也是 BIO 。
 
-> Multiplexed, non-blocking I/O: Multiplexing is the ability to process multiple I/O operationsin one channel. Selectable channels support this. A selectable channel can be put into blocking or non-blocking mode. In blocking mode, every I/O operation invoked upon the channel will block until it completes. In non-blocking mode, an I/O operation will never block and may transfer fewer bytes than were requested or possibly no bytes at all. See the SelectableChannel class.
+>  R: Multiplexing is the ability to process multiple I/O operationsin one channel. Selectable channels support this. A selectable channel can be put into blocking or non-blocking mode. In blocking mode, every I/O operation invoked upon the channel will block until it completes. In non-blocking mode, an I/O operation will never block and may transfer fewer bytes than were requested or possibly no bytes at all. See the SelectableChannel class.
 
 #### NIO 中的 BIO 例子，使用 channel 读取文件
 
