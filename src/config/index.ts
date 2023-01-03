@@ -1,3 +1,4 @@
+import { blog2023Pages } from './blogs-2023'
 import { blog2022Pages } from './blogs-2022'
 import { Page } from './page'
 import { toolPages } from './tools'
@@ -56,7 +57,8 @@ export const pages: Page[] = [
     notSearchable: true
   },
   ...blog2022Pages,
-  ...toolPages
+  ...toolPages,
+  ...blog2023Pages
 ]
 
 /**
