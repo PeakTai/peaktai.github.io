@@ -1,6 +1,0 @@
-<template>
-  <div class="d-flex align-items-center">
-    <div class="spinner-border ms-auto" role="status" aria-hidden="true"></div>
-    <strong>Loading...</strong>
-  </div>
-</template>
